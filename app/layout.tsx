@@ -5,6 +5,7 @@ import { Header } from "@/components/navigator/header"
 import { FilterSidebar } from "@/components/filter-sidebar"
 import { ThemeProvider } from "@/components/theme-provider"
 import { GuidedTourAutoStart } from "@/components/guided-tour-autostart"
+import { CSATDrawer } from "@/components/csat-drawer"
 
 /**
  * ============================================================================
@@ -144,6 +145,9 @@ export default function RootLayout({
 
           {/* Auto-start guided tour for first-time users */}
           <GuidedTourAutoStart />
+          
+          {/* CSAT feedback drawer */}
+          <CSATDrawer />
         </ThemeProvider>
       </body>
     </html>
