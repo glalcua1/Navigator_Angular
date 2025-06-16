@@ -178,14 +178,9 @@ const CustomTooltip = ({ active, payload, label, coordinate }: any) => {
         top: coordinate?.y ? Math.max(20, coordinate.y - 200) : 0,
         transform: coordinate?.x && coordinate.x > window.innerWidth - 400 ? 'translateX(-100%)' : 'none'
       }}>
-        <div className="relative overflow-hidden rounded-2xl border-0 shadow-2xl backdrop-blur-xl bg-white/98 dark:bg-slate-900/98 p-3 w-[360px] max-w-[90vw]">
-          {/* Glassmorphism background */}
-          <div className="absolute inset-0 bg-gradient-to-br from-white/95 via-white/98 to-white/95 dark:from-slate-900/95 dark:via-slate-800/98 dark:to-slate-900/95 backdrop-blur-xl"></div>
-          
-          {/* Animated gradient border */}
-          <div className="absolute inset-0 rounded-2xl p-[1px] bg-gradient-to-r from-[#1800FF]/30 via-[#1800FF]/20 to-[#1800FF]/30 dark:from-[#1800FF]/40 dark:via-[#1800FF]/30 dark:to-[#1800FF]/40">
-            <div className="h-full w-full rounded-2xl bg-gradient-to-br from-white/95 via-white/98 to-white/95 dark:from-slate-900/95 dark:via-slate-800/98 dark:to-slate-900/95"></div>
-          </div>
+        <div className="relative overflow-hidden rounded-2xl border border-slate-200/50 dark:border-slate-700/50 shadow-2xl backdrop-blur-xl bg-white dark:bg-slate-900 p-3 w-[360px] max-w-[90vw]">
+          {/* Simplified background */}
+          <div className="absolute inset-0 bg-white dark:bg-slate-900 rounded-2xl"></div>
 
           <div className="relative">
             {/* Enhanced Header with Rank Information */}
@@ -318,35 +313,33 @@ export function RateTrendsChart(): JSX.Element {
   return (
     <div className="w-full h-full flex flex-col">
       <Tabs defaultValue="rates" className="w-full flex flex-col h-full">
-        {/* Enhanced Tab List with Modern Glassmorphism Design */}
-        <TabsList className="grid w-full grid-cols-2 bg-gradient-to-r from-white/90 via-white/95 to-white/90 dark:from-slate-800/90 dark:via-slate-700/90 dark:to-slate-800/90 backdrop-blur-sm p-1.5 rounded-2xl h-auto border border-[#1800FF]/20 dark:border-[#1800FF]/30 shadow-lg mb-4 flex-shrink-0">
+        {/* Switch-style Tab List */}
+        <TabsList className="inline-flex w-auto bg-transparent p-0 h-auto mb-4 flex-shrink-0 justify-start">
           <TabsTrigger
             value="performance"
             className={cn(
-              "flex items-center gap-2 px-4 py-3 rounded-xl transition-all duration-300 font-semibold text-sm group",
-              "data-[state=active]:bg-gradient-to-r data-[state=active]:from-white data-[state=active]:to-white/90 data-[state=active]:shadow-lg data-[state=active]:text-blue-600",
-              "dark:data-[state=active]:from-slate-800 dark:data-[state=active]:to-slate-700 dark:data-[state=active]:text-blue-400",
-              "text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-200 hover:bg-white/50 dark:hover:bg-slate-700/50"
+              "flex items-center gap-2 px-3 py-2 rounded-lg transition-all duration-300 font-semibold text-sm group border-0",
+              "data-[state=active]:bg-[#1800FF] data-[state=active]:text-white",
+              "data-[state=inactive]:bg-slate-100 data-[state=inactive]:text-slate-600",
+              "dark:data-[state=inactive]:bg-slate-800 dark:data-[state=inactive]:text-slate-400",
+              "hover:bg-[#1800FF]/10 dark:hover:bg-[#1800FF]/20"
             )}
           >
-            <div className="p-1 rounded-lg bg-gradient-to-br from-[#1800FF]/10 to-[#1800FF]/20 group-data-[state=active]:from-[#1800FF]/15 group-data-[state=active]:to-[#1800FF]/25">
-              <BarChart3 className="h-4 w-4" />
-            </div>
+            <BarChart3 className="h-4 w-4" />
             <span className="hidden sm:inline">Performance</span>
             <span className="sm:hidden">Perf</span>
           </TabsTrigger>
           <TabsTrigger
             value="rates"
             className={cn(
-              "flex items-center gap-2 px-4 py-3 rounded-xl transition-all duration-300 font-semibold text-sm group",
-              "data-[state=active]:bg-gradient-to-r data-[state=active]:from-white data-[state=active]:to-white/90 data-[state=active]:shadow-lg data-[state=active]:text-[#1800FF]",
-              "dark:data-[state=active]:from-slate-800 dark:data-[state=active]:to-slate-700 dark:data-[state=active]:text-[#1800FF]",
-              "text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-200 hover:bg-white/50 dark:hover:bg-slate-700/50"
+              "flex items-center gap-2 px-3 py-2 rounded-lg transition-all duration-300 font-semibold text-sm group border-0",
+              "data-[state=active]:bg-[#1800FF] data-[state=active]:text-white",
+              "data-[state=inactive]:bg-slate-100 data-[state=inactive]:text-slate-600",
+              "dark:data-[state=inactive]:bg-slate-800 dark:data-[state=inactive]:text-slate-400",
+              "hover:bg-[#1800FF]/10 dark:hover:bg-[#1800FF]/20"
             )}
           >
-            <div className="p-1 rounded-lg bg-gradient-to-br from-[#1800FF]/10 to-[#1800FF]/20 group-data-[state=active]:from-[#1800FF]/15 group-data-[state=active]:to-[#1800FF]/25">
-              <Activity className="h-4 w-4" />
-            </div>
+            <Activity className="h-4 w-4" />
             <span className="hidden sm:inline">Rate Trends</span>
             <span className="sm:hidden">Trends</span>
           </TabsTrigger>
