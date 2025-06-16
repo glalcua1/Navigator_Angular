@@ -337,7 +337,9 @@ export default function Home(): JSX.Element {
         
         {/* Enhanced content sections with improved spacing */}
         <div className="space-y-16 sm:space-y-20 px-4 sm:px-6 lg:px-8">
-          <PerformancePulseSection />
+          <div className="pt-12 sm:pt-16">
+            <PerformancePulseSection />
+          </div>
           <MarketInsightsSection />
           <PropertyHealthScoreSection />
         </div>

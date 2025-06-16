@@ -104,12 +104,9 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           {/* Main application container with enhanced styling */}
-          <div className="flex min-h-screen bg-background text-foreground overflow-x-hidden">
-            {/* Global Sidebar with theme-aware styling */}
-            <FilterSidebar />
-            
+          <div className="min-h-screen bg-background text-foreground overflow-x-hidden">
             {/* Main content area */}
-            <div className="flex flex-col flex-1 min-w-0">
+            <div className="flex flex-col min-h-screen">
               {/* Global Header with enhanced dark theme support */}
               <Header />
               
