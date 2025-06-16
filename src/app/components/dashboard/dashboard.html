@@ -1,0 +1,237 @@
+<div class="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50/30 to-purple-50/30 dark:from-slate-900 dark:via-slate-800 dark:to-slate-900">
+  <div class="flex flex-col flex-1">
+    <app-header></app-header>
+    
+    <main class="flex-1 p-4 sm:p-6 lg:p-8">
+      <div class="max-w-7xl mx-auto space-y-8">
+        
+        <!-- Enhanced Page Header with Gradient -->
+        <header class="relative overflow-hidden rounded-2xl bg-gradient-to-r from-[#008FFF] via-[#0066FF] to-[#1800FF] p-8 text-white shadow-2xl">
+          <div class="absolute inset-0 bg-black/10"></div>
+          <div class="absolute -top-4 -right-4 w-32 h-32 bg-white/10 rounded-full blur-3xl"></div>
+          <div class="absolute -bottom-4 -left-4 w-24 h-24 bg-white/10 rounded-full blur-2xl"></div>
+          
+          <div class="relative z-10 space-y-4">
+            <div class="flex items-center gap-4">
+              <div class="p-3 bg-white/20 backdrop-blur-sm rounded-xl">
+                <i class="lucide lucide-bar-chart-3 h-8 w-8 text-white"></i>
+              </div>
+              <div>
+                <h1 class="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight">
+                  Performance Dashboard
+                </h1>
+                <p class="text-lg sm:text-xl text-blue-100 mt-2">
+                  Your central hub for hotel analytics and competitive insights
+                </p>
+              </div>
+            </div>
+            
+            <!-- Stats Row -->
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 mt-8">
+              <div class="bg-white/10 backdrop-blur-sm rounded-xl p-4 border border-white/20">
+                <div class="text-2xl font-bold">92%</div>
+                <div class="text-sm text-blue-100">Parity Score</div>
+              </div>
+              <div class="bg-white/10 backdrop-blur-sm rounded-xl p-4 border border-white/20">
+                <div class="text-2xl font-bold">$195</div>
+                <div class="text-sm text-blue-100">Avg Rate</div>
+              </div>
+              <div class="bg-white/10 backdrop-blur-sm rounded-xl p-4 border border-white/20">
+                <div class="text-2xl font-bold">#2</div>
+                <div class="text-sm text-blue-100">Market Pos</div>
+              </div>
+              <div class="bg-white/10 backdrop-blur-sm rounded-xl p-4 border border-white/20">
+                <div class="text-2xl font-bold">+15%</div>
+                <div class="text-sm text-blue-100">Growth</div>
+              </div>
+            </div>
+          </div>
+        </header>
+
+        <!-- Enhanced Overview KPI Cards -->
+        <div class="relative">
+          <div class="absolute inset-0 bg-gradient-to-r from-[#008FFF]/5 to-[#1800FF]/5 rounded-3xl blur-3xl"></div>
+          <div class="relative bg-white/70 dark:bg-slate-800/70 backdrop-blur-xl rounded-3xl p-6 border border-white/20 shadow-xl">
+            <app-overview-kpi-cards></app-overview-kpi-cards>
+          </div>
+        </div>
+
+        <!-- Enhanced Content Sections -->
+        <div class="grid gap-8">
+          
+          <!-- Performance Pulse Section -->
+          <section class="group">
+            <div class="mb-6">
+              <div class="flex items-center gap-4 mb-4">
+                <div class="relative">
+                  <div class="absolute inset-0 bg-gradient-to-r from-[#008FFF] to-[#0066FF] rounded-xl blur-lg opacity-60"></div>
+                  <div class="relative p-3 bg-gradient-to-r from-[#008FFF] to-[#0066FF] rounded-xl">
+                    <i class="lucide lucide-activity h-6 w-6 text-white"></i>
+                  </div>
+                </div>
+                <div>
+                  <h2 class="text-2xl lg:text-3xl font-bold bg-gradient-to-r from-[#008FFF] to-[#1800FF] bg-clip-text text-transparent">
+                    Performance Pulse
+                  </h2>
+                  <p class="text-slate-600 dark:text-slate-400 mt-1">
+                    Real-time rate and channel dynamics for your property
+                  </p>
+                </div>
+              </div>
+            </div>
+            
+            <div class="relative group-hover:scale-[1.01] transition-transform duration-300">
+              <div class="absolute inset-0 bg-gradient-to-r from-[#008FFF]/10 to-[#1800FF]/10 rounded-3xl blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+              <div class="relative bg-white dark:bg-slate-800 rounded-3xl shadow-2xl border border-slate-200/50 dark:border-slate-700/50 overflow-hidden">
+                <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-[#008FFF] via-[#0066FF] to-[#1800FF]"></div>
+                
+                <div class="p-6 sm:p-8">
+                  <div class="mb-6 p-4 bg-gradient-to-r from-blue-50 to-purple-50 dark:from-slate-800/50 dark:to-slate-700/50 rounded-2xl border border-blue-200/50 dark:border-slate-600/50">
+                    <div class="flex items-start gap-3">
+                      <div class="p-2 bg-gradient-to-r from-[#008FFF] to-[#0066FF] rounded-lg">
+                        <i class="lucide lucide-info h-4 w-4 text-white"></i>
+                      </div>
+                      <div>
+                        <p class="text-slate-700 dark:text-slate-300 font-medium">Market Intelligence</p>
+                        <p class="text-sm text-slate-600 dark:text-slate-400 mt-1">
+                          Trends and changes are compared to the previous week with real-time data updates
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <div class="h-[400px] sm:h-[450px] relative">
+                    <div class="absolute inset-0 bg-gradient-to-br from-slate-50/50 to-blue-50/30 dark:from-slate-900/50 dark:to-slate-800/30 rounded-2xl"></div>
+                    <div class="relative h-full p-4">
+                      <app-rate-trends-chart></app-rate-trends-chart>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- Market Insights Section -->
+          <section class="group">
+            <div class="mb-6">
+              <div class="flex items-center gap-4 mb-4">
+                <div class="relative">
+                  <div class="absolute inset-0 bg-gradient-to-r from-[#0066FF] to-[#1800FF] rounded-xl blur-lg opacity-60"></div>
+                  <div class="relative p-3 bg-gradient-to-r from-[#0066FF] to-[#1800FF] rounded-xl">
+                    <i class="lucide lucide-compass h-6 w-6 text-white"></i>
+                  </div>
+                </div>
+                <div>
+                  <h2 class="text-2xl lg:text-3xl font-bold bg-gradient-to-r from-[#0066FF] to-[#1800FF] bg-clip-text text-transparent">
+                    Market Insights
+                  </h2>
+                  <p class="text-slate-600 dark:text-slate-400 mt-1">
+                    Competitive landscape analysis for {{ getCurrentMonth() }}
+                  </p>
+                </div>
+              </div>
+            </div>
+            
+            <div class="relative group-hover:scale-[1.01] transition-transform duration-300">
+              <div class="absolute inset-0 bg-gradient-to-r from-[#0066FF]/10 to-[#1800FF]/10 rounded-3xl blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+              <div class="relative bg-white dark:bg-slate-800 rounded-3xl shadow-2xl border border-slate-200/50 dark:border-slate-700/50 overflow-hidden">
+                <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-[#0066FF] via-[#3344FF] to-[#1800FF]"></div>
+                
+                <div class="p-6 sm:p-8">
+                  <div class="mb-6 p-4 bg-gradient-to-r from-purple-50 to-blue-50 dark:from-slate-800/50 dark:to-slate-700/50 rounded-2xl border border-purple-200/50 dark:border-slate-600/50">
+                    <div class="flex items-start gap-3">
+                      <div class="p-2 bg-gradient-to-r from-[#0066FF] to-[#1800FF] rounded-lg">
+                        <i class="lucide lucide-trending-up h-4 w-4 text-white"></i>
+                      </div>
+                      <div>
+                        <p class="text-slate-700 dark:text-slate-300 font-medium">Market Analysis</p>
+                        <p class="text-sm text-slate-600 dark:text-slate-400 mt-1">
+                          Demand patterns and pricing strategies compared to previous week
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <div class="relative">
+                    <div class="absolute inset-0 bg-gradient-to-br from-blue-50/30 to-purple-50/50 dark:from-slate-900/30 dark:to-slate-800/50 rounded-2xl"></div>
+                    <div class="relative p-4">
+                      <app-market-demand-widget></app-market-demand-widget>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- Property Health Score Section -->
+          <section class="group">
+            <div class="mb-6">
+              <div class="flex items-center gap-4 mb-4">
+                <div class="relative">
+                  <div class="absolute inset-0 bg-gradient-to-r from-[#1800FF] to-[#008FFF] rounded-xl blur-lg opacity-60"></div>
+                  <div class="relative p-3 bg-gradient-to-r from-[#1800FF] to-[#008FFF] rounded-xl">
+                    <i class="lucide lucide-shield-check h-6 w-6 text-white"></i>
+                  </div>
+                </div>
+                <div>
+                  <h2 class="text-2xl lg:text-3xl font-bold bg-gradient-to-r from-[#1800FF] to-[#008FFF] bg-clip-text text-transparent">
+                    Property Health Score
+                  </h2>
+                  <p class="text-slate-600 dark:text-slate-400 mt-1">
+                    Distribution health and channel performance metrics
+                  </p>
+                </div>
+              </div>
+            </div>
+            
+            <div class="relative group-hover:scale-[1.01] transition-transform duration-300">
+              <div class="absolute inset-0 bg-gradient-to-r from-[#1800FF]/10 to-[#008FFF]/10 rounded-3xl blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+              <div class="relative bg-white dark:bg-slate-800 rounded-3xl shadow-2xl border border-slate-200/50 dark:border-slate-700/50 overflow-hidden">
+                <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-[#1800FF] via-[#6633FF] to-[#008FFF]"></div>
+                
+                <div class="p-6 sm:p-8">
+                  <div class="mb-6 p-4 bg-gradient-to-r from-purple-50 to-cyan-50 dark:from-slate-800/50 dark:to-slate-700/50 rounded-2xl border border-purple-200/50 dark:border-slate-600/50">
+                    <div class="flex items-start gap-3">
+                      <div class="p-2 bg-gradient-to-r from-[#1800FF] to-[#008FFF] rounded-lg">
+                        <i class="lucide lucide-activity h-4 w-4 text-white"></i>
+                      </div>
+                      <div>
+                        <p class="text-slate-700 dark:text-slate-300 font-medium">Channel Performance</p>
+                        <p class="text-sm text-slate-600 dark:text-slate-400 mt-1">
+                          Distribution health metrics compared to last week's performance
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <div class="relative">
+                    <div class="absolute inset-0 bg-gradient-to-br from-purple-50/30 to-cyan-50/50 dark:from-slate-900/30 dark:to-slate-800/50 rounded-2xl"></div>
+                    <div class="relative p-4">
+                      <app-property-health-score-widget></app-property-health-score-widget>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+        
+        <!-- Enhanced Footer -->
+        <footer class="mt-12 p-6 bg-gradient-to-r from-slate-100/50 to-blue-50/50 dark:from-slate-800/50 dark:to-slate-700/50 rounded-2xl border border-slate-200/50 dark:border-slate-600/50">
+          <div class="flex items-center justify-between">
+            <div class="flex items-center gap-3">
+              <div class="w-2 h-2 bg-gradient-to-r from-[#008FFF] to-[#1800FF] rounded-full animate-pulse"></div>
+              <p class="text-sm text-slate-600 dark:text-slate-400">
+                Last updated: {{ currentDate | date:'medium' }}
+              </p>
+            </div>
+            <div class="flex items-center gap-2 text-xs text-slate-500 dark:text-slate-400">
+              <i class="lucide lucide-zap h-3 w-3"></i>
+              <span>Real-time data</span>
+            </div>
+          </div>
+        </footer>
+      </div>
+    </main>
+  </div>
+</div> 

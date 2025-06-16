@@ -1,0 +1,230 @@
+<div class="space-y-6">
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+    
+    <!-- Enhanced Channel Cards -->
+    <div *ngFor="let channel of channels; let i = index" class="group relative overflow-hidden">
+      <div class="absolute inset-0 bg-gradient-to-br opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-2xl blur-xl"
+           [class]="i === 0 ? 'from-[#008FFF]/10 to-[#0066FF]/5' : 
+                    i === 1 ? 'from-[#0066FF]/10 to-[#3344FF]/5' : 
+                    i === 2 ? 'from-[#3344FF]/10 to-[#1800FF]/5' : 
+                              'from-[#1800FF]/10 to-[#008FFF]/5'"></div>
+      
+      <div class="relative bg-white dark:bg-slate-800 rounded-2xl shadow-xl border border-slate-200/50 dark:border-slate-700/50 group-hover:shadow-2xl transition-all duration-300 group-hover:scale-[1.02]">
+        <div class="absolute top-0 left-0 right-0 h-1 rounded-t-2xl"
+             [class]="i === 0 ? 'bg-gradient-to-r from-[#008FFF] to-[#0066FF]' : 
+                      i === 1 ? 'bg-gradient-to-r from-[#0066FF] to-[#3344FF]' : 
+                      i === 2 ? 'bg-gradient-to-r from-[#3344FF] to-[#1800FF]' : 
+                                'bg-gradient-to-r from-[#1800FF] to-[#008FFF]'"></div>
+        
+        <!-- Enhanced Header -->
+        <div class="flex items-center justify-between p-6 pb-4">
+          <div class="flex items-center gap-3">
+            <div class="relative">
+              <div class="absolute inset-0 rounded-xl blur-sm"
+                   [class]="i === 0 ? 'bg-gradient-to-r from-[#008FFF]/20 to-[#0066FF]/10' : 
+                            i === 1 ? 'bg-gradient-to-r from-[#0066FF]/20 to-[#3344FF]/10' : 
+                            i === 2 ? 'bg-gradient-to-r from-[#3344FF]/20 to-[#1800FF]/10' : 
+                                      'bg-gradient-to-r from-[#1800FF]/20 to-[#008FFF]/10'"></div>
+              <div class="relative p-3 rounded-xl border"
+                   [class]="i === 0 ? 'bg-gradient-to-r from-[#008FFF]/10 to-[#0066FF]/5 border-blue-200/50' : 
+                            i === 1 ? 'bg-gradient-to-r from-[#0066FF]/10 to-[#3344FF]/5 border-blue-200/50' : 
+                            i === 2 ? 'bg-gradient-to-r from-[#3344FF]/10 to-[#1800FF]/5 border-purple-200/50' : 
+                                      'bg-gradient-to-r from-[#1800FF]/10 to-[#008FFF]/5 border-purple-200/50'">
+                <i [class]="'lucide lucide-' + channel.icon + ' h-5 w-5 ' + channel.iconColor"></i>
+              </div>
+            </div>
+            <div>
+              <h3 class="text-lg font-bold text-slate-800 dark:text-slate-100">{{ channel.name }}</h3>
+              <div class="flex items-center gap-1 mt-1">
+                <div class="w-2 h-2 rounded-full animate-pulse"
+                     [class]="channel.parityIssues === 0 ? 'bg-green-500' : 
+                              channel.parityIssues <= 2 ? 'bg-yellow-500' : 'bg-red-500'"></div>
+                <span class="text-xs font-medium"
+                      [class]="channel.parityIssues === 0 ? 'text-green-600 dark:text-green-400' : 
+                               channel.parityIssues <= 2 ? 'text-yellow-600 dark:text-yellow-400' : 'text-red-600 dark:text-red-400'">
+                  {{ getParityStatusText(channel.parityIssues) }}
+                </span>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Status Badge -->
+          <div class="flex items-center gap-1 px-3 py-1 rounded-full border"
+               [class]="channel.parityIssues === 0 ? 'bg-green-50 dark:bg-green-900/20 border-green-200/50 dark:border-green-700/50' : 
+                        channel.parityIssues <= 2 ? 'bg-yellow-50 dark:bg-yellow-900/20 border-yellow-200/50 dark:border-yellow-700/50' : 
+                                                    'bg-red-50 dark:bg-red-900/20 border-red-200/50 dark:border-red-700/50'">
+            <span class="text-xs font-medium"
+                  [class]="channel.parityIssues === 0 ? 'text-green-700 dark:text-green-300' : 
+                           channel.parityIssues <= 2 ? 'text-yellow-700 dark:text-yellow-300' : 'text-red-700 dark:text-red-300'">
+              {{ channel.parityIssues === 0 ? 'Healthy' : 
+                 channel.parityIssues <= 2 ? 'Warning' : 'Critical' }}
+            </span>
+          </div>
+        </div>
+        
+        <!-- Enhanced Content -->
+        <div class="px-6 pb-6 space-y-6">
+          
+          <!-- Ranking Metric -->
+          <div class="relative">
+            <div class="flex items-center justify-between mb-3">
+              <span class="text-sm font-medium text-slate-600 dark:text-slate-400">Market Ranking</span>
+              <a href="#" class="text-xs font-medium hover:underline"
+                 [class]="i === 0 ? 'text-[#008FFF] hover:text-[#0066FF]' : 
+                          i === 1 ? 'text-[#0066FF] hover:text-[#3344FF]' : 
+                          i === 2 ? 'text-[#3344FF] hover:text-[#1800FF]' : 
+                                    'text-[#1800FF] hover:text-[#008FFF]'">
+                View Details
+              </a>
+            </div>
+            
+            <div class="flex items-baseline justify-between">
+              <div class="flex items-baseline gap-2">
+                <span class="text-3xl font-bold"
+                      [class]="i === 0 ? 'bg-gradient-to-r from-[#008FFF] to-[#0066FF] bg-clip-text text-transparent' : 
+                               i === 1 ? 'bg-gradient-to-r from-[#0066FF] to-[#3344FF] bg-clip-text text-transparent' : 
+                               i === 2 ? 'bg-gradient-to-r from-[#3344FF] to-[#1800FF] bg-clip-text text-transparent' : 
+                                         'bg-gradient-to-r from-[#1800FF] to-[#008FFF] bg-clip-text text-transparent'">
+                  {{ channel.ranking }}
+                </span>
+                <span *ngIf="channel.rankingChange !== '0'" 
+                      class="text-sm font-medium px-2 py-1 rounded-full"
+                      [class]="getRankingChangeColor(channel.rankingChange) + ' ' +
+                               (channel.rankingChange.startsWith('+') ? 'bg-green-50 dark:bg-green-900/20' : 'bg-red-50 dark:bg-red-900/20')">
+                  {{ channel.rankingChange }}
+                </span>
+              </div>
+              <span class="text-sm text-slate-600 dark:text-slate-300 font-medium">1st</span>
+            </div>
+            <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">{{ channel.totalProperties }}</p>
+          </div>
+          
+          <!-- Separator -->
+          <div class="border-t border-slate-200 dark:border-slate-600/50"></div>
+          
+          <!-- Review Score Metric -->
+          <div class="relative">
+            <div class="flex items-center justify-between mb-3">
+              <span class="text-sm font-medium text-slate-600 dark:text-slate-400">Review Score</span>
+              <a href="#" class="text-xs font-medium hover:underline"
+                 [class]="i === 0 ? 'text-[#008FFF] hover:text-[#0066FF]' : 
+                          i === 1 ? 'text-[#0066FF] hover:text-[#3344FF]' : 
+                          i === 2 ? 'text-[#3344FF] hover:text-[#1800FF]' : 
+                                    'text-[#1800FF] hover:text-[#008FFF]'">
+                See Reviews
+              </a>
+            </div>
+            
+            <div class="flex items-baseline justify-between">
+              <div class="flex items-center gap-3">
+                <span class="text-2xl font-bold text-slate-800 dark:text-slate-100">{{ channel.reviewScore }}</span>
+                <!-- Star Rating Visual -->
+                <div class="flex items-center gap-1">
+                  <i *ngFor="let star of [1,2,3,4,5]" 
+                     class="lucide lucide-star h-3 w-3"
+                     [class]="star <= 4 ? 'text-yellow-400 fill-yellow-400' : 'text-slate-300 dark:text-slate-600'">
+                  </i>
+                </div>
+              </div>
+              <span class="text-sm text-slate-600 dark:text-slate-300">Own Hotel</span>
+            </div>
+          </div>
+          
+          <!-- Separator -->
+          <div class="border-t border-slate-200 dark:border-slate-600/50"></div>
+          
+          <!-- Parity Issues Section -->
+          <div class="relative">
+            <div class="flex items-center justify-between mb-3">
+              <span class="text-sm font-medium text-slate-600 dark:text-slate-400">Rate Parity</span>
+              <a href="#" class="text-xs font-medium hover:underline"
+                 [class]="i === 0 ? 'text-[#008FFF] hover:text-[#0066FF]' : 
+                          i === 1 ? 'text-[#0066FF] hover:text-[#3344FF]' : 
+                          i === 2 ? 'text-[#3344FF] hover:text-[#1800FF]' : 
+                                    'text-[#1800FF] hover:text-[#008FFF]'">
+                View Details
+              </a>
+            </div>
+            
+            <div class="flex items-center justify-between">
+              <div class="flex items-center gap-2">
+                <div class="p-2 rounded-lg"
+                     [class]="channel.parityIssues === 0 ? 'bg-green-100 dark:bg-green-900/20' : 
+                              channel.parityIssues <= 2 ? 'bg-yellow-100 dark:bg-yellow-900/20' : 'bg-red-100 dark:bg-red-900/20'">
+                  <i [class]="'lucide h-4 w-4 ' + 
+                              (channel.parityIssues === 0 ? 'lucide-check-circle text-green-600 dark:text-green-400' : 
+                               channel.parityIssues <= 2 ? 'lucide-alert-triangle text-yellow-600 dark:text-yellow-400' : 
+                                                           'lucide-x-circle text-red-600 dark:text-red-400')"></i>
+                </div>
+                <div>
+                  <span class="text-sm font-medium" [class]="getParityStatusColor(channel.parityIssues)">
+                    {{ getParityStatusText(channel.parityIssues) }}
+                  </span>
+                  <div *ngIf="channel.avgLoss > 0" class="text-xs text-slate-500 dark:text-slate-400">
+                    Avg loss: <span class="font-medium text-red-500">${{ channel.avgLoss }}</span>
+                  </div>
+                </div>
+              </div>
+              
+              <!-- Compliance Percentage -->
+              <div class="text-right">
+                <div class="text-lg font-bold"
+                     [class]="channel.parityIssues === 0 ? 'text-green-600' : 
+                              channel.parityIssues <= 2 ? 'text-yellow-600' : 'text-red-600'">
+                  {{ channel.parityIssues === 0 ? '100%' : 
+                     channel.parityIssues <= 2 ? '85%' : '60%' }}
+                </div>
+                <div class="text-xs text-slate-500 dark:text-slate-400">Compliance</div>
+              </div>
+            </div>
+            
+            <!-- Compliance Progress Bar -->
+            <div class="mt-3">
+              <div class="relative h-2 bg-slate-200 dark:bg-slate-700 rounded-full overflow-hidden">
+                <div class="h-full rounded-full transition-all duration-1000 ease-out"
+                     [class]="channel.parityIssues === 0 ? 'bg-gradient-to-r from-green-400 to-green-600' : 
+                              channel.parityIssues <= 2 ? 'bg-gradient-to-r from-yellow-400 to-yellow-600' : 'bg-gradient-to-r from-red-400 to-red-600'"
+                     [style.width]="(channel.parityIssues === 0 ? 100 : 
+                                    channel.parityIssues <= 2 ? 85 : 60) + '%'">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Performance Summary -->
+  <div class="mt-8 relative group">
+    <div class="absolute inset-0 bg-gradient-to-br from-[#008FFF]/5 to-[#1800FF]/3 rounded-3xl blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+    <div class="relative bg-white dark:bg-slate-800 rounded-3xl shadow-2xl border border-slate-200/50 dark:border-slate-700/50 overflow-hidden">
+      <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-[#008FFF] via-[#0066FF] via-[#3344FF] to-[#1800FF]"></div>
+      
+      <div class="p-6">
+        <h4 class="text-lg font-bold bg-gradient-to-r from-[#008FFF] to-[#1800FF] bg-clip-text text-transparent mb-4">
+          Distribution Health Overview
+        </h4>
+        
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
+          <div class="text-center p-4 bg-gradient-to-r from-green-50 to-emerald-50 dark:from-green-900/20 dark:to-emerald-900/10 rounded-xl border border-green-200/50">
+            <div class="text-2xl font-bold text-green-600">1</div>
+            <div class="text-xs text-green-700 dark:text-green-300">Healthy Channels</div>
+          </div>
+          <div class="text-center p-4 bg-gradient-to-r from-yellow-50 to-amber-50 dark:from-yellow-900/20 dark:to-amber-900/10 rounded-xl border border-yellow-200/50">
+            <div class="text-2xl font-bold text-yellow-600">2</div>
+            <div class="text-xs text-yellow-700 dark:text-yellow-300">Needs Attention</div>
+          </div>
+          <div class="text-center p-4 bg-gradient-to-r from-red-50 to-rose-50 dark:from-red-900/20 dark:to-rose-900/10 rounded-xl border border-red-200/50">
+            <div class="text-2xl font-bold text-red-600">1</div>
+            <div class="text-xs text-red-700 dark:text-red-300">Critical Issues</div>
+          </div>
+          <div class="text-center p-4 bg-gradient-to-r from-blue-50 to-cyan-50 dark:from-blue-900/20 dark:to-cyan-900/10 rounded-xl border border-blue-200/50">
+            <div class="text-2xl font-bold text-[#008FFF]">82%</div>
+            <div class="text-xs text-blue-700 dark:text-blue-300">Overall Score</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div> 

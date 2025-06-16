@@ -1,0 +1,104 @@
+<div class="flex flex-col gap-4 sm:gap-6 w-full">
+  <!-- KPI Cards Section -->
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+    
+    <!-- Demand Index Card -->
+    <div class="relative overflow-hidden rounded-xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 shadow-md hover:shadow-lg transition-shadow duration-300 w-full">
+      <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-cyan-400 to-blue-500"></div>
+      <div class="p-4 pb-2">
+        <h3 class="text-sm sm:text-base font-medium text-slate-600 dark:text-slate-300 truncate">
+          Demand Index
+        </h3>
+      </div>
+      <div class="p-4 pt-2">
+        <div class="text-2xl sm:text-3xl font-bold text-slate-800 dark:text-slate-100">{{ demandIndex }}</div>
+        <p class="text-xs text-slate-500 dark:text-slate-400 mt-0.5 sm:mt-1">
+          <span [class]="getChangeColor(demandChange)">{{ demandChange }}</span> vs. Yesterday
+        </p>
+        <a href="#" class="mt-2 sm:mt-3 inline-flex items-center text-xs sm:text-sm font-medium text-blue-600 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300">
+          Details
+          <i class="lucide lucide-arrow-right ml-1 h-3 w-3 sm:h-4 sm:w-4"></i>
+        </a>
+      </div>
+    </div>
+
+    <!-- Top 5 Source Markets Card -->
+    <div class="relative overflow-hidden rounded-xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 shadow-md hover:shadow-lg transition-shadow duration-300 w-full">
+      <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-cyan-400 to-blue-500"></div>
+      <div class="p-4 pb-2">
+        <h3 class="text-sm sm:text-base font-medium text-slate-600 dark:text-slate-300 truncate">
+          Top 5 Source Markets
+        </h3>
+      </div>
+      <div class="p-4 pt-2">
+        <div class="space-y-1.5 sm:space-y-2">
+          <div *ngFor="let market of sourceMarkets" class="flex flex-col gap-0.5">
+            <div class="flex items-center justify-between text-[10px] sm:text-xs">
+              <span class="font-medium truncate pr-1">{{ market.name }}</span>
+              <span>{{ market.percent }}</span>
+            </div>
+            <div class="h-1.5 sm:h-2 w-full rounded-full bg-gray-200 dark:bg-gray-700">
+              <div class="h-full rounded-full bg-blue-500" [style.width]="market.width"></div>
+            </div>
+          </div>
+        </div>
+        <a href="#" class="mt-2 sm:mt-3 inline-flex items-center text-xs sm:text-sm font-medium text-blue-600 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300">
+          Details
+          <i class="lucide lucide-arrow-right ml-1 h-3 w-3 sm:h-4 sm:w-4"></i>
+        </a>
+      </div>
+    </div>
+
+    <!-- Market RevPAR Card -->
+    <div class="relative overflow-hidden rounded-xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 shadow-md hover:shadow-lg transition-shadow duration-300 w-full">
+      <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-cyan-400 to-blue-500"></div>
+      <div class="p-4 pb-2">
+        <h3 class="text-sm sm:text-base font-medium text-slate-600 dark:text-slate-300 truncate">
+          Market RevPAR
+        </h3>
+      </div>
+      <div class="p-4 pt-2">
+        <div class="text-2xl sm:text-3xl font-bold text-slate-800 dark:text-slate-100">{{ revPAR }}</div>
+        <p class="text-xs text-slate-500 dark:text-slate-400 mt-0.5 sm:mt-1">
+          <span [class]="getChangeColor(revPARChange)">{{ revPARChange }}</span> vs. Yesterday
+        </p>
+        <a href="#" class="mt-2 sm:mt-3 inline-flex items-center text-xs sm:text-sm font-medium text-blue-600 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300">
+          Details
+          <i class="lucide lucide-arrow-right ml-1 h-3 w-3 sm:h-4 sm:w-4"></i>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Price Comparison Table -->
+  <div class="space-y-4 sm:space-y-6 mt-4 sm:mt-6 w-full">
+    <div class="relative overflow-hidden rounded-xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 shadow-md hover:shadow-lg transition-shadow duration-300 w-full">
+      <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-cyan-400 to-blue-500"></div>
+      <div class="p-3 sm:p-4 overflow-x-auto">
+        <h4 class="text-sm font-medium text-slate-700 dark:text-slate-300 mb-3">Recent Price Comparison</h4>
+        <div class="overflow-x-auto">
+          <table class="w-full text-xs sm:text-sm">
+            <thead>
+              <tr class="border-b border-slate-200 dark:border-slate-600">
+                <th class="text-left p-2 font-medium text-slate-600 dark:text-slate-400">Date</th>
+                <th class="text-right p-2 font-medium text-slate-600 dark:text-slate-400">My Price</th>
+                <th class="text-right p-2 font-medium text-slate-600 dark:text-slate-400">Comp Price</th>
+                <th class="text-right p-2 font-medium text-slate-600 dark:text-slate-400">Difference</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of priceComparisonData" class="border-b border-slate-100 dark:border-slate-700">
+                <td class="p-2 text-slate-700 dark:text-slate-300">{{ item.date }}</td>
+                <td class="p-2 text-right text-slate-700 dark:text-slate-300">${{ item.myPrice }}</td>
+                <td class="p-2 text-right text-slate-700 dark:text-slate-300">${{ item.compPrice }}</td>
+                <td class="p-2 text-right" [class]="item.difference > 0 ? 'text-green-500' : 'text-red-500'">
+                  {{ item.difference > 0 ? '+' : '' }}${{ item.difference }}
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,164 @@
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+  
+  <!-- Average Rate Card -->
+  <div class="group relative overflow-hidden">
+    <div class="absolute inset-0 bg-gradient-to-br from-[#008FFF]/10 to-[#0066FF]/5 rounded-2xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+    <div class="relative bg-white dark:bg-slate-800 rounded-2xl p-6 shadow-xl border border-slate-200/50 dark:border-slate-700/50 group-hover:shadow-2xl transition-all duration-300 group-hover:scale-[1.02]">
+      <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-[#008FFF] to-[#0066FF] rounded-t-2xl"></div>
+      
+      <div class="flex items-start justify-between mb-4">
+        <div class="relative">
+          <div class="absolute inset-0 bg-gradient-to-r from-[#008FFF]/20 to-[#0066FF]/10 rounded-xl blur-sm"></div>
+          <div class="relative p-3 bg-gradient-to-r from-[#008FFF]/10 to-[#0066FF]/5 rounded-xl border border-blue-200/50">
+            <i class="lucide lucide-dollar-sign h-6 w-6 text-[#008FFF]"></i>
+          </div>
+        </div>
+        <div class="flex items-center gap-1 px-3 py-1 bg-green-50 dark:bg-green-900/20 rounded-full border border-green-200/50 dark:border-green-700/50">
+          <i class="lucide lucide-trending-up h-3 w-3 text-green-600 dark:text-green-400"></i>
+          <span class="text-xs font-medium text-green-700 dark:text-green-300">+8.2%</span>
+        </div>
+      </div>
+      
+      <div class="space-y-2">
+        <h3 class="text-sm font-medium text-slate-600 dark:text-slate-400">Average Rate</h3>
+        <div class="flex items-baseline gap-2">
+          <span class="text-3xl font-bold bg-gradient-to-r from-[#008FFF] to-[#0066FF] bg-clip-text text-transparent">$195</span>
+          <span class="text-sm text-slate-500 dark:text-slate-400">per night</span>
+        </div>
+        <p class="text-xs text-slate-500 dark:text-slate-400">vs. last month</p>
+      </div>
+      
+      <!-- Sparkline Chart -->
+      <div class="mt-4 h-8 flex items-end gap-1">
+        <div class="w-2 bg-gradient-to-t from-[#008FFF]/30 to-[#008FFF]/60 rounded-sm" style="height: 40%"></div>
+        <div class="w-2 bg-gradient-to-t from-[#008FFF]/30 to-[#008FFF]/60 rounded-sm" style="height: 60%"></div>
+        <div class="w-2 bg-gradient-to-t from-[#008FFF]/30 to-[#008FFF]/60 rounded-sm" style="height: 45%"></div>
+        <div class="w-2 bg-gradient-to-t from-[#008FFF]/30 to-[#008FFF]/60 rounded-sm" style="height: 80%"></div>
+        <div class="w-2 bg-gradient-to-t from-[#008FFF]/30 to-[#008FFF]/60 rounded-sm" style="height: 100%"></div>
+        <div class="w-2 bg-gradient-to-t from-[#008FFF]/30 to-[#008FFF]/60 rounded-sm" style="height: 75%"></div>
+        <div class="w-2 bg-gradient-to-t from-[#008FFF]/30 to-[#008FFF]/60 rounded-sm" style="height: 90%"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Parity Status Card -->
+  <div class="group relative overflow-hidden">
+    <div class="absolute inset-0 bg-gradient-to-br from-[#0066FF]/10 to-[#3344FF]/5 rounded-2xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+    <div class="relative bg-white dark:bg-slate-800 rounded-2xl p-6 shadow-xl border border-slate-200/50 dark:border-slate-700/50 group-hover:shadow-2xl transition-all duration-300 group-hover:scale-[1.02]">
+      <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-[#0066FF] to-[#3344FF] rounded-t-2xl"></div>
+      
+      <div class="flex items-start justify-between mb-4">
+        <div class="relative">
+          <div class="absolute inset-0 bg-gradient-to-r from-[#0066FF]/20 to-[#3344FF]/10 rounded-xl blur-sm"></div>
+          <div class="relative p-3 bg-gradient-to-r from-[#0066FF]/10 to-[#3344FF]/5 rounded-xl border border-blue-200/50">
+            <i class="lucide lucide-target h-6 w-6 text-[#0066FF]"></i>
+          </div>
+        </div>
+        <div class="flex items-center gap-1 px-3 py-1 bg-green-50 dark:bg-green-900/20 rounded-full border border-green-200/50 dark:border-green-700/50">
+          <span class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
+          <span class="text-xs font-medium text-green-700 dark:text-green-300">Excellent</span>
+        </div>
+      </div>
+      
+      <div class="space-y-2">
+        <h3 class="text-sm font-medium text-slate-600 dark:text-slate-400">Parity Status</h3>
+        <div class="flex items-baseline gap-2">
+          <span class="text-3xl font-bold bg-gradient-to-r from-[#0066FF] to-[#3344FF] bg-clip-text text-transparent">92%</span>
+          <span class="text-sm text-slate-500 dark:text-slate-400">compliance</span>
+        </div>
+        <p class="text-xs text-slate-500 dark:text-slate-400">across all channels</p>
+      </div>
+      
+      <!-- Circular Progress -->
+      <div class="mt-4 flex justify-center">
+        <div class="relative w-12 h-12">
+          <svg class="w-12 h-12 transform -rotate-90" viewBox="0 0 36 36">
+            <path class="text-slate-200 dark:text-slate-700" stroke="currentColor" stroke-width="3" fill="none" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"/>
+            <path class="text-[#0066FF]" stroke="currentColor" stroke-width="3" fill="none" stroke-linecap="round" stroke-dasharray="92, 100" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"/>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Market Position Card -->
+  <div class="group relative overflow-hidden">
+    <div class="absolute inset-0 bg-gradient-to-br from-[#3344FF]/10 to-[#1800FF]/5 rounded-2xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+    <div class="relative bg-white dark:bg-slate-800 rounded-2xl p-6 shadow-xl border border-slate-200/50 dark:border-slate-700/50 group-hover:shadow-2xl transition-all duration-300 group-hover:scale-[1.02]">
+      <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-[#3344FF] to-[#1800FF] rounded-t-2xl"></div>
+      
+      <div class="flex items-start justify-between mb-4">
+        <div class="relative">
+          <div class="absolute inset-0 bg-gradient-to-r from-[#3344FF]/20 to-[#1800FF]/10 rounded-xl blur-sm"></div>
+          <div class="relative p-3 bg-gradient-to-r from-[#3344FF]/10 to-[#1800FF]/5 rounded-xl border border-purple-200/50">
+            <i class="lucide lucide-trophy h-6 w-6 text-[#3344FF]"></i>
+          </div>
+        </div>
+        <div class="flex items-center gap-1 px-3 py-1 bg-amber-50 dark:bg-amber-900/20 rounded-full border border-amber-200/50 dark:border-amber-700/50">
+          <i class="lucide lucide-medal h-3 w-3 text-amber-600 dark:text-amber-400"></i>
+          <span class="text-xs font-medium text-amber-700 dark:text-amber-300">Top 3</span>
+        </div>
+      </div>
+      
+      <div class="space-y-2">
+        <h3 class="text-sm font-medium text-slate-600 dark:text-slate-400">Market Position</h3>
+        <div class="flex items-baseline gap-2">
+          <span class="text-3xl font-bold bg-gradient-to-r from-[#3344FF] to-[#1800FF] bg-clip-text text-transparent">#2</span>
+          <span class="text-sm text-slate-500 dark:text-slate-400">of 15</span>
+        </div>
+        <p class="text-xs text-slate-500 dark:text-slate-400">in competitive set</p>
+      </div>
+      
+      <!-- Position Indicator -->
+      <div class="mt-4 space-y-2">
+        <div class="flex justify-between text-xs text-slate-500 dark:text-slate-400">
+          <span>#1</span>
+          <span>#15</span>
+        </div>
+        <div class="relative h-2 bg-slate-200 dark:bg-slate-700 rounded-full">
+          <div class="absolute top-0 left-0 w-[13%] h-2 bg-gradient-to-r from-[#3344FF] to-[#1800FF] rounded-full"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Event Impact Card -->
+  <div class="group relative overflow-hidden">
+    <div class="absolute inset-0 bg-gradient-to-br from-[#1800FF]/10 to-[#008FFF]/5 rounded-2xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+    <div class="relative bg-white dark:bg-slate-800 rounded-2xl p-6 shadow-xl border border-slate-200/50 dark:border-slate-700/50 group-hover:shadow-2xl transition-all duration-300 group-hover:scale-[1.02]">
+      <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-[#1800FF] to-[#008FFF] rounded-t-2xl"></div>
+      
+      <div class="flex items-start justify-between mb-4">
+        <div class="relative">
+          <div class="absolute inset-0 bg-gradient-to-r from-[#1800FF]/20 to-[#008FFF]/10 rounded-xl blur-sm"></div>
+          <div class="relative p-3 bg-gradient-to-r from-[#1800FF]/10 to-[#008FFF]/5 rounded-xl border border-purple-200/50">
+            <i class="lucide lucide-calendar-days h-6 w-6 text-[#1800FF]"></i>
+          </div>
+        </div>
+        <div class="flex items-center gap-1 px-3 py-1 bg-blue-50 dark:bg-blue-900/20 rounded-full border border-blue-200/50 dark:border-blue-700/50">
+          <i class="lucide lucide-zap h-3 w-3 text-blue-600 dark:text-blue-400"></i>
+          <span class="text-xs font-medium text-blue-700 dark:text-blue-300">Active</span>
+        </div>
+      </div>
+      
+      <div class="space-y-2">
+        <h3 class="text-sm font-medium text-slate-600 dark:text-slate-400">Event Impact</h3>
+        <div class="flex items-baseline gap-2">
+          <span class="text-lg font-bold bg-gradient-to-r from-[#1800FF] to-[#008FFF] bg-clip-text text-transparent">Conference</span>
+        </div>
+        <p class="text-xs text-slate-500 dark:text-slate-400">Week of Jun 15-22</p>
+      </div>
+      
+      <!-- Event Timeline -->
+      <div class="mt-4 space-y-2">
+        <div class="flex items-center gap-2">
+          <div class="w-2 h-2 bg-gradient-to-r from-[#1800FF] to-[#008FFF] rounded-full"></div>
+          <span class="text-xs text-slate-600 dark:text-slate-400">Day 3 of 7</span>
+        </div>
+        <div class="relative h-1 bg-slate-200 dark:bg-slate-700 rounded-full">
+          <div class="absolute top-0 left-0 w-[43%] h-1 bg-gradient-to-r from-[#1800FF] to-[#008FFF] rounded-full"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div> 
