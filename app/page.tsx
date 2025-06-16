@@ -297,19 +297,18 @@ export default function Home(): JSX.Element {
   }, [])
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-slate-100 dark:from-slate-950 dark:via-slate-900 dark:to-slate-800">
+    <div className="min-h-screen bg-white dark:bg-slate-900">
       {/* Main content with enhanced spacing and backdrop */}
-      <div className="relative space-y-6 sm:space-y-8" role="main" aria-label="Performance Dashboard">
+      <div className="relative space-y-4 sm:space-y-6" role="main" aria-label="Performance Dashboard">
         {/* Filter bar without sticky positioning and shadow */}
-        <div className="backdrop-blur-sm bg-white/60 dark:bg-slate-900/60 border-b border-slate-200/30 dark:border-slate-700/30 transition-all duration-300" data-tour="filters">
+        <div className="border-b border-slate-200 dark:border-slate-700" data-tour="filters">
           <div className="relative">
             <FilterBar onMoreFiltersClick={handleMoreFiltersClick} />
           </div>
         </div>
         
         {/* Enhanced page header with gradient text - Updated colors */}
-        <header className="relative px-4 sm:px-6 lg:px-8 pt-2 pb-3 text-left">
-          <div className="absolute -inset-2 bg-gradient-to-r from-[#1800FF]/5 via-[#1800FF]/10 to-emerald-500/5 rounded-xl blur-xl"></div>
+        <header className="relative px-4 sm:px-6 lg:px-8 pt-4 sm:pt-6 pb-3 sm:pb-4 text-left">
           <div className="relative max-w-4xl">
             <h1 className="text-2xl sm:text-3xl lg:text-4xl font-black tracking-tight mb-1">
               <span className="bg-gradient-to-r from-slate-900 via-[#1800FF] to-emerald-800 dark:from-slate-100 dark:via-[#1800FF] dark:to-emerald-300 bg-clip-text text-transparent">
@@ -327,7 +326,6 @@ export default function Home(): JSX.Element {
         
         {/* Enhanced KPI Cards Section */}
         <div className="relative px-4 sm:px-6 lg:px-8" data-tour="kpi-cards">
-          <div className="absolute -inset-6 bg-gradient-to-r from-[#1800FF]/5 to-emerald-500/5 rounded-3xl blur-2xl"></div>
           <div className="relative">
             <Suspense fallback={<LoadingSkeleton />}>
               <OverviewKpiCards />

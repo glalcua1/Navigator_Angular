@@ -106,7 +106,7 @@ export function FilterBar({ onMoreFiltersClick }: FilterBarProps): JSX.Element {
       <div className="absolute inset-0 bg-gradient-to-r from-white/98 via-white/95 to-white/98 dark:from-slate-900/98 dark:via-slate-800/95 dark:to-slate-900/98 backdrop-blur-2xl"></div>
       <div className="absolute inset-0 bg-gradient-to-b from-[#1800FF]/5 via-transparent to-purple-50/10 dark:from-[#1800FF]/10 dark:via-transparent dark:to-purple-950/5"></div>
       
-      <div className="relative px-4 sm:px-6 lg:px-8 py-3 sm:py-4">
+      <div className="relative px-4 sm:px-6 lg:px-8 py-1 sm:py-2">
         <div className="flex flex-col lg:flex-row lg:items-center gap-4 lg:gap-6">
           {/* Main filters section - Enhanced layout without property selector */}
           <div className="flex flex-1 items-center gap-4">
@@ -127,10 +127,10 @@ export function FilterBar({ onMoreFiltersClick }: FilterBarProps): JSX.Element {
                 <SelectContent className="rounded-xl border-0 bg-white/95 dark:bg-slate-800/95 backdrop-blur-xl shadow-2xl w-64">
                   {/* Historical Options */}
                   <div className="px-3 py-2 border-b border-slate-200/50 dark:border-slate-600/50">
-                    <p className="text-xs font-bold text-slate-600 dark:text-slate-300 uppercase tracking-wide flex items-center gap-2">
+                    <div className="text-xs font-bold text-slate-600 dark:text-slate-300 uppercase tracking-wide flex items-center gap-2">
                       <div className="w-2 h-2 rounded-full bg-blue-500"></div>
                       Historical
-                    </p>
+                    </div>
                   </div>
                   {dateRangeOptions.filter(option => option.category === "historical").map((option) => (
                     <SelectItem 
@@ -147,10 +147,10 @@ export function FilterBar({ onMoreFiltersClick }: FilterBarProps): JSX.Element {
                   
                   {/* Future Options */}
                   <div className="px-3 py-2 mt-2 border-t border-b border-slate-200/50 dark:border-slate-600/50">
-                    <p className="text-xs font-bold text-slate-600 dark:text-slate-300 uppercase tracking-wide flex items-center gap-2">
+                    <div className="text-xs font-bold text-slate-600 dark:text-slate-300 uppercase tracking-wide flex items-center gap-2">
                       <div className="w-2 h-2 rounded-full bg-emerald-500"></div>
                       Future
-                    </p>
+                    </div>
                   </div>
                   {dateRangeOptions.filter(option => option.category === "future").map((option) => (
                     <SelectItem 
@@ -169,10 +169,10 @@ export function FilterBar({ onMoreFiltersClick }: FilterBarProps): JSX.Element {
                   {dateRangeOptions.filter(option => option.category === "other").length > 0 && (
                     <>
                       <div className="px-3 py-2 mt-2 border-t border-slate-200/50 dark:border-slate-600/50">
-                        <p className="text-xs font-bold text-slate-600 dark:text-slate-300 uppercase tracking-wide flex items-center gap-2">
+                        <div className="text-xs font-bold text-slate-600 dark:text-slate-300 uppercase tracking-wide flex items-center gap-2">
                           <div className="w-2 h-2 rounded-full bg-purple-500"></div>
                           Other
-                        </p>
+                        </div>
                       </div>
                       {dateRangeOptions.filter(option => option.category === "other").map((option) => (
                         <SelectItem 
