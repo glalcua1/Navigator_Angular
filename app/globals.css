@@ -216,6 +216,23 @@
     --header-accent: 261 83% 70%;
     --header-shadow: 0 4px 24px 0 rgba(0, 0, 0, 0.2);
   }
+
+  /* ========== GLOBAL OVERFLOW CONTROL ========== */
+  html, body {
+    overflow-x: hidden;
+    width: 100%;
+    height: 100%;
+  }
+  
+  body {
+    overflow-y: auto;
+  }
+
+  /* ========== PREVENT HORIZONTAL OVERFLOW ========== */
+  * {
+    max-width: 100%;
+    box-sizing: border-box;
+  }
 }
 
 @layer base {

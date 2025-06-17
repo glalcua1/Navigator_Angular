@@ -146,7 +146,7 @@ export function Header(): JSX.Element {
 
   return (
     <header 
-      className="sticky top-0 z-40 w-full backdrop-blur-xl bg-white/85 dark:bg-slate-900/85 border-b border-white/25 dark:border-slate-700/50 shadow-lg dark:shadow-black/10" 
+      className="sticky top-0 z-40 w-full backdrop-blur-xl bg-white/90 dark:bg-slate-900/90 border-b border-white/30 dark:border-slate-700/50 shadow-lg dark:shadow-black/10" 
       role="banner"
       data-tour="header"
     >

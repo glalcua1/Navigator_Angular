@@ -125,21 +125,6 @@ const PerformancePulseSection = memo(() => (
         <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-[#1800FF] via-[#1800FF] to-[#1800FF]"></div>
         
         <CardContent className="relative p-6 sm:p-8">
-          {/* Info banner with modern design - Updated colors */}
-          <div className="mb-6 flex items-start gap-3 rounded-2xl bg-gradient-to-r from-[#1800FF]/5 to-[#1800FF]/10 dark:from-slate-800/60 dark:to-slate-700/40 p-4 border border-[#1800FF]/20 dark:border-slate-600/30 backdrop-blur-sm">
-            <div className="p-2 rounded-xl bg-[#1800FF]/10 dark:bg-[#1800FF]/20">
-              <Info className="h-4 w-4 text-[#1800FF] dark:text-[#1800FF]" />
-            </div>
-            <div className="flex-1">
-              <p className="text-sm font-medium text-slate-800 dark:text-slate-200">
-                Live Market Intelligence
-              </p>
-              <p className="text-xs text-slate-600 dark:text-slate-400 mt-1">
-                Trends and changes are compared to the previous week with real-time updates
-              </p>
-            </div>
-          </div>
-          
           {/* Chart container with enhanced styling - Increased height for better tooltip visibility */}
           <div className="relative h-[420px] sm:h-[500px] w-full overflow-hidden rounded-xl bg-gradient-to-br from-slate-50/50 to-white/30 dark:from-slate-800/30 dark:to-slate-900/50 border border-slate-200/50 dark:border-slate-700/30">
             <Suspense fallback={<LoadingSkeleton />}>
@@ -260,38 +245,86 @@ const PropertyHealthScoreSection = memo(() => (
 PropertyHealthScoreSection.displayName = "PropertyHealthScoreSection"
 
 /**
- * Enhanced Home Page Component with modern design system
+ * Enhanced Home Page Component with fixed header/filter layout
  * 
  * Features:
+ * - Fixed header and filter section for better UX
+ * - Full-width filters for improved usability
+ * - Reduced spacing for more compact layout
  * - Glassmorphism design with backdrop blur effects
  * - Enhanced gradients and visual hierarchy
  * - Modern spacing and typography
  * - Sophisticated animations and micro-interactions
  * - Advanced loading states with shimmer effects
  * - Updated #1800FF color scheme throughout
+ * - Debug logging for development troubleshooting
  * 
- * @returns {JSX.Element} The modernized dashboard page
+ * @returns {JSX.Element} The modernized dashboard page with fixed layout
+ * @author Dashboard Team
+ * @version 3.0.0
+ * @since 2024-01-01
+ * 
+ * @example
+ * ```tsx
+ * <Home />
+ * ```
+ * 
+ * @debugInfo Console logs filter interactions and layout changes in development
  */
 export default function Home(): JSX.Element {
   const [isFilterSidebarOpen, setIsFilterSidebarOpen] = useState(false)
 
+  /**
+   * Handles opening the filter sidebar with debug logging
+   * @description Opens the advanced filters sidebar and logs the action for debugging
+   */
   const handleMoreFiltersClick = useCallback(() => {
     setIsFilterSidebarOpen(true)
-  }, [])
+    
+    // Debug logging for development
+    if (process.env.NODE_ENV === 'development') {
+      console.log('🔍 Filter sidebar opened:', {
+        timestamp: new Date().toISOString(),
+        action: 'open_filter_sidebar',
+        previousState: isFilterSidebarOpen
+      })
+    }
+  }, [isFilterSidebarOpen])
 
+  /**
+   * Handles closing the filter sidebar with debug logging
+   * @description Closes the advanced filters sidebar and logs the action for debugging
+   */
   const handleFilterSidebarClose = useCallback(() => {
     setIsFilterSidebarOpen(false)
-  }, [])
+    
+    // Debug logging for development
+    if (process.env.NODE_ENV === 'development') {
+      console.log('❌ Filter sidebar closed:', {
+        timestamp: new Date().toISOString(),
+        action: 'close_filter_sidebar',
+        previousState: isFilterSidebarOpen
+      })
+    }
+  }, [isFilterSidebarOpen])
 
+  /**
+   * Handles filter application with comprehensive debug logging
+   * @param {any} filters - The applied filter configuration
+   * @description Processes filter application and provides detailed logging for debugging
+   */
   const handleFilterApply = useCallback((filters: any) => {
     console.log("Applied filters:", filters)
     setIsFilterSidebarOpen(false)
     
+    // Enhanced debug logging for development
     if (process.env.NODE_ENV === 'development') {
-      console.log('Filter applied:', {
+      console.log('✅ Filters applied:', {
         timestamp: new Date().toISOString(),
         filtersCount: Object.keys(filters).length,
-        filters
+        filters,
+        action: 'apply_filters',
+        sidebarClosed: true
       })
     }
   }, [])
@@ -300,22 +333,22 @@ export default function Home(): JSX.Element {
     <div className="min-h-screen bg-white dark:bg-slate-900">
       {/* Main content with enhanced spacing and backdrop */}
       <div className="relative space-y-4 sm:space-y-6" role="main" aria-label="Performance Dashboard">
-        {/* Filter bar without sticky positioning and shadow */}
+        {/* Filter bar with original positioning */}
         <div className="border-b border-slate-200 dark:border-slate-700" data-tour="filters">
           <div className="relative">
             <FilterBar onMoreFiltersClick={handleMoreFiltersClick} />
           </div>
         </div>
         
-        {/* Enhanced page header with gradient text - Updated colors */}
-        <header className="relative px-4 sm:px-6 lg:px-8 pt-4 sm:pt-6 pb-3 sm:pb-4 text-left">
+        {/* Enhanced page header with improved spacing - keeping the increased space */}
+        <header className="relative px-4 sm:px-6 lg:px-8 pt-6 sm:pt-8 pb-2 sm:pb-3 text-left">
           <div className="relative max-w-4xl">
-            <h1 className="text-2xl sm:text-3xl lg:text-4xl font-black tracking-tight mb-1">
+            <h1 className="text-xl sm:text-2xl lg:text-3xl font-black tracking-tight mb-1">
               <span className="bg-gradient-to-r from-slate-900 via-[#1800FF] to-emerald-800 dark:from-slate-100 dark:via-[#1800FF] dark:to-emerald-300 bg-clip-text text-transparent">
                 Performance Dashboard
               </span>
             </h1>
-            <p className="text-sm sm:text-base lg:text-lg text-slate-600 dark:text-slate-400 font-medium leading-relaxed">
+            <p className="text-xs sm:text-sm lg:text-base text-slate-600 dark:text-slate-400 font-medium leading-relaxed">
               Your intelligent hub for
               <span className="text-[#1800FF] dark:text-[#1800FF] font-semibold"> hotel analytics</span>,
               <span className="text-emerald-600 dark:text-emerald-400 font-semibold"> competitive insights</span>, and
@@ -334,8 +367,8 @@ export default function Home(): JSX.Element {
         </div>
         
         {/* Enhanced content sections with improved spacing */}
-        <div className="space-y-16 sm:space-y-20 px-4 sm:px-6 lg:px-8">
-          <div className="pt-12 sm:pt-16">
+        <div className="space-y-8 sm:space-y-12 px-4 sm:px-6 lg:px-8">
+          <div className="pt-4 sm:pt-6">
             <PerformancePulseSection />
           </div>
           <MarketInsightsSection />

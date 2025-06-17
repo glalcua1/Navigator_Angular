@@ -95,7 +95,7 @@ export default function RootLayout({
         />
       </head>
       
-      <body className="antialiased">
+      <body className="antialiased overflow-x-hidden">
         {/* Theme Provider for proper dark/light mode handling */}
         <ThemeProvider
           attribute="class"
@@ -104,7 +104,7 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           {/* Main application container with enhanced styling */}
-          <div className="min-h-screen bg-background text-foreground overflow-x-hidden">
+          <div className="min-h-screen bg-background text-foreground">
             {/* Main content area */}
             <div className="flex flex-col min-h-screen">
               {/* Global Header with enhanced dark theme support */}
@@ -112,7 +112,7 @@ export default function RootLayout({
               
               {/* Main content with enhanced spacing and accessibility */}
               <main 
-                className="flex-1 p-4 sm:p-6 lg:p-8 overflow-x-hidden relative"
+                className="flex-1 p-4 sm:p-6 lg:p-8 relative"
                 role="main"
                 aria-label="Dashboard content"
               >

@@ -1,7 +1,10 @@
 "use client"
+import React, { useState } from "react"
 import {
   Line,
   LineChart as RechartsLineChart,
+  Bar,
+  BarChart as RechartsBarChart,
   CartesianGrid,
   XAxis,
   YAxis,
@@ -15,7 +18,8 @@ import { ChartContainer } from "@/components/ui/chart"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
 import { Badge } from "@/components/ui/badge"
-import { TrendingUp, BarChart3, Activity, Star, ArrowUp, ArrowDown, Minus, Crown, Sparkles } from "lucide-react"
+import { Button } from "@/components/ui/button"
+import { TrendingUp, BarChart3, Activity, Star, ArrowUp, ArrowDown, Minus, Crown, Sparkles, LineChart } from "lucide-react"
 import { cn } from "@/lib/utils"
 
 /**
@@ -40,7 +44,6 @@ const randomHotelNames = [
   "Palm Grove Suites",
   "Sunset Bay Villas",
   "Starfish Retreat",
-  "Lagoon Paradise",
 ]
 
 // Enhanced data with more variation for better visual trends
@@ -54,7 +57,6 @@ const hotelRatesData = [
     [randomHotelNames[3]]: 1880,
     [randomHotelNames[4]]: 2136,
     [randomHotelNames[5]]: 1920,
-    [randomHotelNames[6]]: 1750,
   },
   {
     date: "14 Jun 2025",
@@ -65,7 +67,6 @@ const hotelRatesData = [
     [randomHotelNames[3]]: 1920,
     [randomHotelNames[4]]: 2200,
     [randomHotelNames[5]]: 1960,
-    [randomHotelNames[6]]: 1780,
   },
   {
     date: "21 Jun 2025",
@@ -76,7 +77,6 @@ const hotelRatesData = [
     [randomHotelNames[3]]: 1960,
     [randomHotelNames[4]]: 2280,
     [randomHotelNames[5]]: 2000,
-    [randomHotelNames[6]]: 1820,
   },
   {
     date: "28 Jun 2025",
@@ -87,7 +87,6 @@ const hotelRatesData = [
     [randomHotelNames[3]]: 1720,
     [randomHotelNames[4]]: 2150,
     [randomHotelNames[5]]: 1850,
-    [randomHotelNames[6]]: 1720,
   },
   {
     date: "5 Jul 2025",
@@ -98,7 +97,6 @@ const hotelRatesData = [
     [randomHotelNames[3]]: 1780,
     [randomHotelNames[4]]: 2180,
     [randomHotelNames[5]]: 1890,
-    [randomHotelNames[6]]: 1760,
   },
   {
     date: "12 Jul 2025",
@@ -109,7 +107,6 @@ const hotelRatesData = [
     [randomHotelNames[3]]: 1840,
     [randomHotelNames[4]]: 2250,
     [randomHotelNames[5]]: 1930,
-    [randomHotelNames[6]]: 1800,
   },
 ]
 
@@ -292,6 +289,9 @@ const CustomTooltip = ({ active, payload, label, coordinate }: any) => {
  * @returns {JSX.Element} The enhanced rate trends chart component
  */
 export function RateTrendsChart(): JSX.Element {
+  // Chart type state for Rate Trends toggle
+  const [chartType, setChartType] = useState<'line' | 'bar'>('line')
+
   // Separate Direct Website data from the rest
   const directWebsiteData = channelPerformanceTableData.find((item) => item.channel === "Direct Website")
   const otherChannelData = channelPerformanceTableData.filter((item) => item.channel !== "Direct Website")
@@ -496,87 +496,181 @@ export function RateTrendsChart(): JSX.Element {
               <div className="h-full w-full rounded-2xl bg-gradient-to-br from-white/95 via-white/98 to-white/95 dark:from-slate-900/95 dark:via-slate-800/98 dark:to-slate-900/95"></div>
             </div>
 
-            {/* Top accent gradient */}
-            <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-[#1800FF] via-[#1800FF]/80 to-[#1800FF]"></div>
-
-            <div className="relative h-full p-4 sm:p-6">
-              <ResponsiveContainer width="100%" height="100%">
-                <RechartsLineChart
-                  data={hotelRatesData}
-                  margin={{ top: 20, right: 30, left: 20, bottom: 60 }}
+            {/* Chart Type Toggle - Smart UX placement */}
+            <div className="absolute top-4 right-4 z-10">
+              <div className="flex items-center gap-1 p-1 bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm rounded-lg border border-slate-200/50 dark:border-slate-700/50 shadow-lg">
+                <Button
+                  variant={chartType === 'line' ? 'default' : 'ghost'}
+                  size="sm"
+                  onClick={() => setChartType('line')}
+                  className={cn(
+                    "h-8 px-3 text-xs font-medium transition-all duration-200",
+                    chartType === 'line' 
+                      ? "bg-[#1800FF] text-white shadow-sm" 
+                      : "text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 hover:bg-slate-100 dark:hover:bg-slate-700"
+                  )}
                 >
-                  <CartesianGrid
-                    strokeDasharray="3 3"
-                    stroke="#e2e8f0"
-                    className="dark:stroke-slate-600"
-                    vertical={false}
-                    opacity={0.6}
-                  />
-                  <XAxis
-                    dataKey="shortDate"
-                    tickLine={false}
-                    axisLine={false}
-                    tickMargin={12}
-                    className="text-xs text-slate-600 dark:text-slate-400"
-                    tick={{ fontSize: 12, fontWeight: 600 }}
-                  />
-                  <YAxis
-                    tickLine={false}
-                    axisLine={false}
-                    tickMargin={12}
-                    tickFormatter={(value) => `$${(value / 1000).toFixed(1)}k`}
-                    domain={[1400, 2400]}
-                    className="text-xs text-slate-600 dark:text-slate-400"
-                    tick={{ fontSize: 12, fontWeight: 600 }}
-                  />
-                  <Tooltip
-                    content={<CustomTooltip />}
-                    cursor={{ 
-                      stroke: "#3b82f6", 
-                      strokeWidth: 2, 
-                      strokeDasharray: "5 5",
-                      opacity: 0.8
-                    }}
-                  />
-                  <Legend
-                    verticalAlign="bottom"
-                    height={50}
-                    iconType="line"
-                    wrapperStyle={{ 
-                      paddingTop: "20px", 
-                      fontSize: "11px",
-                      color: "#64748b",
-                      fontWeight: 600
-                    }}
-                  />
-                  
-                  {/* Enhanced Line Components with Better Styling */}
-                  {randomHotelNames.map((hotelName, index) => (
-                    <Line
-                      key={hotelName}
-                      type="monotone"
-                      dataKey={hotelName}
-                      stroke={chartColors[index % chartColors.length]}
-                      strokeWidth={3}
-                      name={hotelName}
-                      dot={{ 
-                        fill: chartColors[index % chartColors.length], 
-                        strokeWidth: 3, 
-                        r: 5,
-                        stroke: "#fff"
-                      }}
-                      activeDot={{ 
-                        r: 8, 
-                        stroke: chartColors[index % chartColors.length], 
-                        strokeWidth: 3,
-                        fill: "#fff",
-                        shadow: "0 4px 8px rgba(0,0,0,0.2)"
-                      }}
-                      connectNulls
-                      strokeDasharray={index === 0 ? "0" : index === 6 ? "8 4" : "0"}
+                  <LineChart className="h-3 w-3 mr-1" />
+                  Line
+                </Button>
+                <Button
+                  variant={chartType === 'bar' ? 'default' : 'ghost'}
+                  size="sm"
+                  onClick={() => setChartType('bar')}
+                  className={cn(
+                    "h-8 px-3 text-xs font-medium transition-all duration-200",
+                    chartType === 'bar' 
+                      ? "bg-[#1800FF] text-white shadow-sm" 
+                      : "text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 hover:bg-slate-100 dark:hover:bg-slate-700"
+                  )}
+                >
+                  <BarChart3 className="h-3 w-3 mr-1" />
+                  Bar
+                </Button>
+              </div>
+            </div>
+
+            <div className="relative h-full p-4 sm:p-6 pt-16 sm:pt-16">
+              <ResponsiveContainer width="100%" height="100%">
+                {chartType === 'line' ? (
+                  <RechartsLineChart
+                    data={hotelRatesData}
+                    margin={{ top: 20, right: 30, left: 20, bottom: 60 }}
+                  >
+                    <CartesianGrid
+                      strokeDasharray="3 3"
+                      stroke="#e2e8f0"
+                      className="dark:stroke-slate-600"
+                      vertical={false}
+                      opacity={0.6}
                     />
-                  ))}
-                </RechartsLineChart>
+                    <XAxis
+                      dataKey="shortDate"
+                      tickLine={false}
+                      axisLine={false}
+                      tickMargin={12}
+                      className="text-xs text-slate-600 dark:text-slate-400"
+                      tick={{ fontSize: 12, fontWeight: 600 }}
+                    />
+                    <YAxis
+                      tickLine={false}
+                      axisLine={false}
+                      tickMargin={12}
+                      tickFormatter={(value) => `$${(value / 1000).toFixed(1)}k`}
+                      domain={[1400, 2400]}
+                      className="text-xs text-slate-600 dark:text-slate-400"
+                      tick={{ fontSize: 12, fontWeight: 600 }}
+                    />
+                    <Tooltip
+                      content={<CustomTooltip />}
+                      cursor={{ 
+                        stroke: "#3b82f6", 
+                        strokeWidth: 2, 
+                        strokeDasharray: "5 5",
+                        opacity: 0.8
+                      }}
+                    />
+                    <Legend
+                      verticalAlign="bottom"
+                      height={50}
+                      iconType="line"
+                      wrapperStyle={{ 
+                        paddingTop: "20px", 
+                        fontSize: "11px",
+                        color: "#64748b",
+                        fontWeight: 600
+                      }}
+                    />
+                    
+                    {/* Enhanced Line Components with Better Styling */}
+                    {randomHotelNames.map((hotelName, index) => (
+                      <Line
+                        key={hotelName}
+                        type="monotone"
+                        dataKey={hotelName}
+                        stroke={chartColors[index % chartColors.length]}
+                        strokeWidth={3}
+                        name={hotelName}
+                        dot={{ 
+                          fill: chartColors[index % chartColors.length], 
+                          strokeWidth: 3, 
+                          r: 5,
+                          stroke: "#fff"
+                        }}
+                        activeDot={{ 
+                          r: 8, 
+                          stroke: chartColors[index % chartColors.length], 
+                          strokeWidth: 3,
+                          fill: "#fff",
+                          shadow: "0 4px 8px rgba(0,0,0,0.2)"
+                        }}
+                        connectNulls
+                        strokeDasharray={index === 0 ? "0" : index === 6 ? "8 4" : "0"}
+                      />
+                    ))}
+                  </RechartsLineChart>
+                ) : (
+                  <RechartsBarChart
+                    data={hotelRatesData}
+                    margin={{ top: 20, right: 30, left: 20, bottom: 60 }}
+                  >
+                    <CartesianGrid
+                      strokeDasharray="3 3"
+                      stroke="#e2e8f0"
+                      className="dark:stroke-slate-600"
+                      vertical={false}
+                      opacity={0.6}
+                    />
+                    <XAxis
+                      dataKey="shortDate"
+                      tickLine={false}
+                      axisLine={false}
+                      tickMargin={12}
+                      className="text-xs text-slate-600 dark:text-slate-400"
+                      tick={{ fontSize: 12, fontWeight: 600 }}
+                    />
+                    <YAxis
+                      tickLine={false}
+                      axisLine={false}
+                      tickMargin={12}
+                      tickFormatter={(value) => `$${(value / 1000).toFixed(1)}k`}
+                      domain={[1400, 2400]}
+                      className="text-xs text-slate-600 dark:text-slate-400"
+                      tick={{ fontSize: 12, fontWeight: 600 }}
+                    />
+                    <Tooltip
+                      content={<CustomTooltip />}
+                      cursor={{ 
+                        fill: "rgba(59, 130, 246, 0.1)",
+                        stroke: "#3b82f6", 
+                        strokeWidth: 1
+                      }}
+                    />
+                    <Legend
+                      verticalAlign="bottom"
+                      height={50}
+                      iconType="rect"
+                      wrapperStyle={{ 
+                        paddingTop: "20px", 
+                        fontSize: "11px",
+                        color: "#64748b",
+                        fontWeight: 600
+                      }}
+                    />
+                    
+                    {/* Enhanced Bar Components with Better Styling */}
+                    {randomHotelNames.map((hotelName, index) => (
+                      <Bar
+                        key={hotelName}
+                        dataKey={hotelName}
+                        fill={chartColors[index % chartColors.length]}
+                        name={hotelName}
+                        radius={[4, 4, 0, 0]}
+                        opacity={0.8}
+                      />
+                    ))}
+                  </RechartsBarChart>
+                )}
               </ResponsiveContainer>
             </div>
           </div>
