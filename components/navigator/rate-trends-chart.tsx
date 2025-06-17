@@ -13,6 +13,9 @@ import {
   Tooltip,
   Area,
   AreaChart,
+  Scatter,
+  ComposedChart,
+  ReferenceLine
 } from "recharts"
 import { ChartContainer } from "@/components/ui/chart"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
@@ -36,9 +39,9 @@ const chartColors = [
   "#ec4899", // Pink
 ]
 
-// Random hotel names for the chart lines
+// Hotel names for the chart lines - Your hotel is first
 const randomHotelNames = [
-  "Azure Sands Resort",
+  "Dubai Hotel - 5 Star", // Your hotel (matches header selector)
   "Coral Reef Inn", 
   "Ocean Breeze Hotel",
   "Palm Grove Suites",
@@ -46,80 +49,119 @@ const randomHotelNames = [
   "Starfish Retreat",
 ]
 
-// Enhanced data with more variation for better visual trends
+// Events data for plotting on the chart
+const eventsData = [
+  {
+    date: "14 Jun 2025",
+    eventName: "Business Summit",
+    type: "conference",
+    impact: "medium",
+    description: "Regional business conference affecting demand",
+    color: "#10b981" // emerald
+  },
+  {
+    date: "5 Jul 2025", 
+    eventName: "Tech Conference",
+    type: "conference",
+    impact: "high",
+    description: "Major tech conference - high demand expected",
+    color: "#ef4444" // red
+  },
+  {
+    date: "12 Jul 2025",
+    eventName: "Trade Exhibition", 
+    type: "exhibition",
+    impact: "medium",
+    description: "International trade exhibition",
+    color: "#f59e0b" // amber
+  }
+]
+
+// Helper function to get event for a specific date
+const getEventForDate = (date: string) => {
+  return eventsData.find(event => event.date === date)
+}
+
+// Realistic hotel data showing your hotel's pricing challenges
 const hotelRatesData = [
   {
     date: "7 Jun 2025",
     shortDate: "7 Jun",
-    [randomHotelNames[0]]: 2100,
-    [randomHotelNames[1]]: 1580,
+    [randomHotelNames[0]]: 2100, // Your hotel - consistently high
+    [randomHotelNames[1]]: 1580, // Lowest competitor
     [randomHotelNames[2]]: 1650,
     [randomHotelNames[3]]: 1880,
-    [randomHotelNames[4]]: 2136,
-    [randomHotelNames[5]]: 1920,
+    [randomHotelNames[4]]: 1920,
+    [randomHotelNames[5]]: 1740,
+    event: null
   },
   {
     date: "14 Jun 2025",
     shortDate: "14 Jun",
-    [randomHotelNames[0]]: 2136,
-    [randomHotelNames[1]]: 1620,
+    [randomHotelNames[0]]: 2100, // Your hotel - stable high price
+    [randomHotelNames[1]]: 1580, // Consistent low competitor
     [randomHotelNames[2]]: 1680,
-    [randomHotelNames[3]]: 1920,
-    [randomHotelNames[4]]: 2200,
-    [randomHotelNames[5]]: 1960,
+    [randomHotelNames[3]]: 1900,
+    [randomHotelNames[4]]: 1950,
+    [randomHotelNames[5]]: 1780,
+    event: getEventForDate("14 Jun 2025")
   },
   {
     date: "21 Jun 2025",
     shortDate: "21 Jun",
-    [randomHotelNames[0]]: 2200,
-    [randomHotelNames[1]]: 1650,
+    [randomHotelNames[0]]: 2100, // Your hotel - maintaining high rate
+    [randomHotelNames[1]]: 1580, // Competitor staying low
     [randomHotelNames[2]]: 1720,
-    [randomHotelNames[3]]: 1960,
-    [randomHotelNames[4]]: 2280,
-    [randomHotelNames[5]]: 2000,
+    [randomHotelNames[3]]: 1920,
+    [randomHotelNames[4]]: 1980,
+    [randomHotelNames[5]]: 1820,
+    event: null
   },
   {
     date: "28 Jun 2025",
     shortDate: "28 Jun",
-    [randomHotelNames[0]]: 1880,
-    [randomHotelNames[1]]: 1590,
-    [randomHotelNames[2]]: 1630,
-    [randomHotelNames[3]]: 1720,
-    [randomHotelNames[4]]: 2150,
-    [randomHotelNames[5]]: 1850,
+    [randomHotelNames[0]]: 2100, // Your hotel - steady pricing
+    [randomHotelNames[1]]: 1580, // Low competitor consistent
+    [randomHotelNames[2]]: 1700,
+    [randomHotelNames[3]]: 1890,
+    [randomHotelNames[4]]: 1960,
+    [randomHotelNames[5]]: 1800,
+    event: null
   },
   {
     date: "5 Jul 2025",
     shortDate: "5 Jul",
-    [randomHotelNames[0]]: 1950,
-    [randomHotelNames[1]]: 1610,
-    [randomHotelNames[2]]: 1660,
-    [randomHotelNames[3]]: 1780,
-    [randomHotelNames[4]]: 2180,
-    [randomHotelNames[5]]: 1890,
+    [randomHotelNames[0]]: 2100, // Your hotel - needs adjustment
+    [randomHotelNames[1]]: 1580, // Consistent low rate
+    [randomHotelNames[2]]: 1710,
+    [randomHotelNames[3]]: 1910,
+    [randomHotelNames[4]]: 1970,
+    [randomHotelNames[5]]: 1810,
+    event: getEventForDate("5 Jul 2025")
   },
   {
     date: "12 Jul 2025",
     shortDate: "12 Jul",
-    [randomHotelNames[0]]: 2050,
-    [randomHotelNames[1]]: 1640,
-    [randomHotelNames[2]]: 1700,
-    [randomHotelNames[3]]: 1840,
-    [randomHotelNames[4]]: 2250,
-    [randomHotelNames[5]]: 1930,
+    [randomHotelNames[0]]: 2100, // Your hotel - current rate
+    [randomHotelNames[1]]: 1580, // Lowest market rate
+    [randomHotelNames[2]]: 1720,
+    [randomHotelNames[3]]: 1920,
+    [randomHotelNames[4]]: 1980,
+    [randomHotelNames[5]]: 1820,
+    event: getEventForDate("12 Jul 2025")
   },
 ]
 
-// Enhanced Channel Performance data with more realistic entries
+// Enhanced Channel Performance data with consistent parity issues
 const channelPerformanceTableData = [
-  { channel: "Booking.com", yourRate: 2100.0, lowestCompetitor: 1580.0, marketShare: "28%", bookings: 145, trend: "up" },
-  { channel: "Expedia", yourRate: 2050.0, lowestCompetitor: 1580.0, marketShare: "22%", bookings: 98, trend: "down" },
-  { channel: "Agoda", yourRate: 2080.0, lowestCompetitor: 1580.0, marketShare: "18%", bookings: 76, trend: "up" },
-  { channel: "Direct Website", yourRate: 1950.0, lowestCompetitor: 1580.0, marketShare: "15%", bookings: 89, trend: "stable" },
-  { channel: "Hotels.com", yourRate: 2120.0, lowestCompetitor: 1580.0, marketShare: "8%", bookings: 34, trend: "up" },
-  { channel: "Kayak", yourRate: 2100.0, lowestCompetitor: 1580.0, marketShare: "4%", bookings: 23, trend: "down" },
-  { channel: "Priceline", yourRate: 2090.0, lowestCompetitor: 1580.0, marketShare: "3%", bookings: 18, trend: "stable" },
-  { channel: "Orbitz", yourRate: 2110.0, lowestCompetitor: 1580.0, marketShare: "2%", bookings: 12, trend: "up" },
+  { channel: "Booking.com", yourRate: 2100.0, lowestCompetitor: 1580.0, marketShare: "24%", bookings: 132, trend: "down" },
+  { channel: "Expedia", yourRate: 2100.0, lowestCompetitor: 1580.0, marketShare: "19%", bookings: 87, trend: "down" },
+  { channel: "Agoda", yourRate: 2100.0, lowestCompetitor: 1580.0, marketShare: "16%", bookings: 68, trend: "down" },
+  { channel: "Direct Website", yourRate: 1950.0, lowestCompetitor: 1580.0, marketShare: "18%", bookings: 94, trend: "stable" },
+  { channel: "Hotels.com", yourRate: 2100.0, lowestCompetitor: 1580.0, marketShare: "12%", bookings: 45, trend: "down" },
+  { channel: "Kayak", yourRate: 2100.0, lowestCompetitor: 1580.0, marketShare: "6%", bookings: 28, trend: "down" },
+  { channel: "Priceline", yourRate: 2100.0, lowestCompetitor: 1580.0, marketShare: "3%", bookings: 18, trend: "stable" },
+  { channel: "Orbitz", yourRate: 2100.0, lowestCompetitor: 1580.0, marketShare: "2%", bookings: 12, trend: "down" },
 ]
 
 // Helper function to determine parity status and styling
@@ -164,6 +206,10 @@ const CustomTooltip = ({ active, payload, label, coordinate }: any) => {
   if (active && payload && payload.length) {
     const hoveredHotelName = payload[0].name
     const hoveredHotelPrice = payload[0].value
+
+    // Get event data for this date
+    const currentDateData = hotelRatesData.find(data => data.shortDate === label || data.date === label)
+    const eventInfo = currentDateData?.event
 
     // Sort competitors by price to show competitive positioning
     const sortedData = payload.sort((a: any, b: any) => b.value - a.value)
@@ -264,6 +310,40 @@ const CustomTooltip = ({ active, payload, label, coordinate }: any) => {
                 )}
               </div>
             </div>
+
+            {/* Event Information - Show when event exists */}
+            {eventInfo && (
+              <div className="mt-3 pt-3 border-t border-slate-200/50 dark:border-slate-700/50">
+                <div className="flex items-center gap-2 mb-2">
+                  <Activity className="h-3 w-3 text-slate-500 dark:text-slate-400" />
+                  <p className="font-bold text-slate-700 dark:text-slate-300 text-xs">Event Impact</p>
+                </div>
+                <div className="p-2.5 rounded-xl border border-slate-200/50 dark:border-slate-700/50 bg-gradient-to-r from-slate-50/50 to-white/30 dark:from-slate-800/50 dark:to-slate-900/30">
+                  <div className="flex items-center gap-2 mb-1">
+                    <div 
+                      className="w-2 h-2 rounded-full" 
+                      style={{ backgroundColor: eventInfo.color }}
+                    />
+                    <span className="font-bold text-slate-900 dark:text-slate-100 text-sm">
+                      {eventInfo.eventName}
+                    </span>
+                    <span className={cn(
+                      "text-xs px-1.5 py-0.5 rounded-md font-medium",
+                      eventInfo.impact === 'high' 
+                        ? 'bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-300'
+                        : eventInfo.impact === 'medium'
+                        ? 'bg-amber-100 text-amber-700 dark:bg-amber-900/30 dark:text-amber-300'
+                        : 'bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-300'
+                    )}>
+                      {eventInfo.impact} impact
+                    </span>
+                  </div>
+                  <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
+                    {eventInfo.description}
+                  </p>
+                </div>
+              </div>
+            )}
           </div>
         </div>
       </div>
@@ -533,7 +613,7 @@ export function RateTrendsChart(): JSX.Element {
             <div className="relative h-full p-4 sm:p-6 pt-16 sm:pt-16">
               <ResponsiveContainer width="100%" height="100%">
                 {chartType === 'line' ? (
-                  <RechartsLineChart
+                  <ComposedChart
                     data={hotelRatesData}
                     margin={{ top: 20, right: 30, left: 20, bottom: 60 }}
                   >
@@ -608,9 +688,34 @@ export function RateTrendsChart(): JSX.Element {
                         strokeDasharray={index === 0 ? "0" : index === 6 ? "8 4" : "0"}
                       />
                     ))}
-                  </RechartsLineChart>
+
+                    {/* Event Markers - Add reference lines for events */}
+                    {hotelRatesData.map((dataPoint, index) => 
+                      dataPoint.event ? (
+                        <ReferenceLine
+                          key={`event-${index}`}
+                          x={dataPoint.shortDate}
+                          stroke={dataPoint.event.color}
+                          strokeWidth={3}
+                          strokeDasharray="8 4"
+                          opacity={0.8}
+                          label={{
+                            value: `📅 ${dataPoint.event.eventName}`,
+                            position: "topLeft",
+                            offset: 10,
+                            style: {
+                              fontSize: "10px",
+                              fontWeight: "600",
+                              fill: dataPoint.event.color,
+                              textAnchor: "start"
+                            }
+                          }}
+                        />
+                      ) : null
+                    )}
+                  </ComposedChart>
                 ) : (
-                  <RechartsBarChart
+                  <ComposedChart
                     data={hotelRatesData}
                     margin={{ top: 20, right: 30, left: 20, bottom: 60 }}
                   >
@@ -669,7 +774,32 @@ export function RateTrendsChart(): JSX.Element {
                         opacity={0.8}
                       />
                     ))}
-                  </RechartsBarChart>
+
+                    {/* Event Markers for Bar Chart */}
+                    {hotelRatesData.map((dataPoint, index) => 
+                      dataPoint.event ? (
+                        <ReferenceLine
+                          key={`event-bar-${index}`}
+                          x={dataPoint.shortDate}
+                          stroke={dataPoint.event.color}
+                          strokeWidth={3}
+                          strokeDasharray="8 4"
+                          opacity={0.8}
+                          label={{
+                            value: `📅 ${dataPoint.event.eventName}`,
+                            position: "topLeft",
+                            offset: 10,
+                            style: {
+                              fontSize: "10px",
+                              fontWeight: "600",
+                              fill: dataPoint.event.color,
+                              textAnchor: "start"
+                            }
+                          }}
+                        />
+                      ) : null
+                    )}
+                  </ComposedChart>
                 )}
               </ResponsiveContainer>
             </div>
