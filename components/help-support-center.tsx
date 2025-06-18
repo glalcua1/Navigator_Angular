@@ -42,6 +42,7 @@ import {
 } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { useGuidedTour } from '@/lib/guided-tour'
+import { useUser } from '@/hooks/use-user'
 
 /**
  * ============================================================================
@@ -334,14 +335,28 @@ export function HelpSupportCenter() {
   const [searchQuery, setSearchQuery] = useState("")
   const [selectedCategory, setSelectedCategory] = useState("all")
   const { startQuickTour, startComprehensiveTour, startRevenueManagerTour } = useGuidedTour()
+  const { user, email, userId, displayName } = useUser()
+  
   const [supportForm, setSupportForm] = useState({
     title: "",
     description: "",
     category: "",
     priority: "medium" as const,
     email: "",
-    phone: ""
+    phone: "",
+    userId: ""
   })
+
+  // Auto-populate email and userId when user data is available
+  React.useEffect(() => {
+    if (user && email && userId) {
+      setSupportForm(prev => ({
+        ...prev,
+        email: email,
+        userId: userId
+      }))
+    }
+  }, [user, email, userId])
 
   const filteredArticles = knowledgeBase.filter(article => {
     const matchesSearch = article.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -357,21 +372,53 @@ export function HelpSupportCenter() {
 
   const handleSupportSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    // Here you would typically send the support ticket to your backend
-    console.log("Support ticket submitted:", supportForm)
     
-    // Reset form
-    setSupportForm({
-      title: "",
-      description: "",
-      category: "",
-      priority: "medium",
-      email: "",
-      phone: ""
-    })
-    
-    // Show success message (you could use a toast notification)
-    alert("Support ticket submitted successfully! We'll get back to you within 24 hours.")
+    // Show loading state
+    const submitButton = e.target as HTMLFormElement
+    const button = submitButton.querySelector('button[type="submit"]') as HTMLButtonElement
+    if (button) {
+      button.disabled = true
+      button.textContent = 'Sending...'
+    }
+
+    try {
+      // Send the support request via API
+      const response = await fetch('/api/send-support-email', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(supportForm),
+      })
+
+      const result = await response.json()
+
+      if (response.ok && result.success) {
+        // Reset form on success
+        setSupportForm({
+          title: "",
+          description: "",
+          category: "",
+          priority: "medium",
+          email: "",
+          phone: "",
+          userId: ""
+        })
+        
+        alert(`✅ Support request sent successfully to ${result.recipient}!\n\nTicket ID: ${result.ticketId}\n\nWe'll get back to you within 24 hours.`)
+      } else {
+        throw new Error(result.error || 'Failed to send support request')
+      }
+    } catch (error) {
+      console.error('Error submitting support request:', error)
+      alert(`❌ Failed to send support request: ${error instanceof Error ? error.message : 'Unknown error'}\n\nPlease try again or contact support directly at gaurav.lal@rategain.com`)
+    } finally {
+      // Reset button state
+      if (button) {
+        button.disabled = false
+        button.textContent = 'Submit Support Ticket'
+      }
+    }
   }
 
   return (
@@ -515,13 +562,17 @@ export function HelpSupportCenter() {
                   <form onSubmit={handleSupportSubmit} className="space-y-4">
                     <div className="grid md:grid-cols-2 gap-4">
                       <div>
-                        <Label htmlFor="email">Email *</Label>
+                        <Label htmlFor="email" className="flex items-center gap-2">
+                          Email *
+                          {user && <span className="text-xs text-green-600 dark:text-green-400 font-medium">✓ Auto-filled</span>}
+                        </Label>
                         <Input
                           id="email"
                           type="email"
                           value={supportForm.email}
                           onChange={(e) => setSupportForm(prev => ({ ...prev, email: e.target.value }))}
                           required
+                          placeholder={user ? `Logged in as ${displayName}` : "Enter your email"}
                         />
                       </div>
                       <div>
@@ -531,8 +582,24 @@ export function HelpSupportCenter() {
                           type="tel"
                           value={supportForm.phone}
                           onChange={(e) => setSupportForm(prev => ({ ...prev, phone: e.target.value }))}
+                          placeholder="Enter your phone number"
                         />
                       </div>
+                    </div>
+
+                    <div>
+                      <Label htmlFor="userId" className="flex items-center gap-2">
+                        User ID *
+                        {user && <span className="text-xs text-green-600 dark:text-green-400 font-medium">✓ Auto-filled</span>}
+                      </Label>
+                      <Input
+                        id="userId"
+                        type="text"
+                        value={supportForm.userId}
+                        onChange={(e) => setSupportForm(prev => ({ ...prev, userId: e.target.value }))}
+                        placeholder={user ? "Automatically filled from session" : "Enter your user ID"}
+                        required
+                      />
                     </div>
 
                     <div>

@@ -7,6 +7,7 @@ import { FilterSidebar } from "@/components/filter-sidebar"
 import { ThemeProvider } from "@/components/theme-provider"
 import { GuidedTourAutoStart } from "@/components/guided-tour-autostart"
 import { CSATDrawer } from "@/components/csat-drawer"
+import { UserSwitcher } from "@/components/user-switcher"
 import { cn } from "@/lib/utils"
 
 /**
@@ -335,6 +336,14 @@ export default function RootLayout({
         {/* Enhanced User Experience Features */}
         <GuidedTourAutoStart />
         <CSATDrawer />
+        
+        {/* Development Tools */}
+        {process.env.NODE_ENV === 'development' && (
+          <div>
+            {/* User Switcher for testing */}
+            <UserSwitcher />
+          </div>
+        )}
 
         {/* Performance Monitoring Script (if needed) */}
         {process.env.NODE_ENV === 'production' && (

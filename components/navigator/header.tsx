@@ -1,7 +1,7 @@
 "use client"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
-import { useState } from "react"
+import React, { useState, useEffect } from "react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger, DropdownMenuSeparator } from "@/components/ui/dropdown-menu"
@@ -9,6 +9,7 @@ import { ChevronDown, Settings, UserCircle, Search, Loader2, Building, Sparkles,
 import { ThemeToggle } from "@/components/theme-toggle"
 import { Badge } from "@/components/ui/badge"
 import { cn } from "@/lib/utils"
+import { useUser } from '@/hooks/use-user'
 
 const navItems = [
   { name: "Overview", href: "/" },
@@ -70,12 +71,20 @@ const hotelOptions = [
  */
 export function Header(): JSX.Element {
   const pathname = usePathname()
-  const [selectedHotel, setSelectedHotel] = useState("Dubai Hotel - 5 Star")
+  const { user, displayName, initials, role, hotelName } = useUser()
+  const [selectedHotel, setSelectedHotel] = useState(hotelName || "Dubai Hotel - 5 Star")
   const [hotelSearch, setHotelSearch] = useState("")
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
   const [searchFocused, setSearchFocused] = useState(false)
   const [notificationCount] = useState(3)
+
+  // Update selected hotel when user data changes
+  useEffect(() => {
+    if (hotelName && hotelName !== selectedHotel) {
+      setSelectedHotel(hotelName)
+    }
+  }, [hotelName, selectedHotel])
 
   /**
    * Determines the active navigation tab based on current pathname
@@ -383,9 +392,19 @@ export function Header(): JSX.Element {
           {/* Enhanced User Profile with avatar */}
           <div className="relative group">
             <div className="absolute inset-0 bg-gradient-to-r from-[#1800FF] to-[#1800FF] rounded-full blur-md opacity-0 group-hover:opacity-60 transition-opacity duration-300"></div>
-            <Button variant="ghost" size="icon" className="relative rounded-full hover:scale-110 transition-all duration-300" aria-label="User Profile">
-              <div className="w-8 h-8 bg-gradient-to-r from-[#1800FF] to-[#1800FF] rounded-full flex items-center justify-center shadow-lg">
-                <span className="text-white text-sm font-semibold">U</span>
+            <Button 
+              variant="ghost" 
+              className="relative rounded-full hover:scale-110 transition-all duration-300 h-auto p-1" 
+              aria-label={`User Profile: ${displayName} - ${role}`}
+            >
+              <div className="flex items-center gap-2">
+                <div className="w-8 h-8 bg-gradient-to-r from-[#1800FF] to-[#1800FF] rounded-full flex items-center justify-center shadow-lg">
+                  <span className="text-white text-sm font-semibold">{initials}</span>
+                </div>
+                <div className="hidden lg:block text-left">
+                  <div className="text-sm font-medium text-slate-700 dark:text-slate-200">{displayName}</div>
+                  <div className="text-xs text-slate-500 dark:text-slate-400">{role}</div>
+                </div>
               </div>
             </Button>
           </div>
