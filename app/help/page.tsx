@@ -1,3 +1,4 @@
+import React from "react"
 import type { Metadata } from "next"
 import { HelpSupportPage } from "@/components/help-support-page"
 

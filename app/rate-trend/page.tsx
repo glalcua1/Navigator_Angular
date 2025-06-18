@@ -1,5 +1,5 @@
 "use client"
-import { useState } from "react"
+import React, { useState } from "react"
 import { RateTrendCalendar } from "@/components/navigator/rate-trend-calendar"
 import { RateTrendFilters } from "@/components/navigator/rate-trend-filters"
 import { RateTrendHeader } from "@/components/navigator/rate-trend-header"

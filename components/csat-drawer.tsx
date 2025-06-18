@@ -155,26 +155,26 @@ export function CSATDrawer() {
             size="lg"
             onClick={handleManualOpen}
             className={cn(
-              "fixed bottom-6 right-6 z-50 h-14 w-14 rounded-full shadow-lg hover:shadow-xl transition-all duration-200 bg-primary hover:bg-primary/90 border-2 border-white dark:border-gray-800",
-              hasReachedBottom && shouldAutoTrigger && "animate-pulse ring-4 ring-primary/30"
+              "fixed bottom-6 right-6 z-50 h-14 w-14 rounded-full shadow-lg hover:shadow-xl transition-all duration-200 bg-[#1800FF] hover:bg-[#1500CC] border-2 border-white dark:border-slate-700 text-white",
+              hasReachedBottom && shouldAutoTrigger && "animate-pulse ring-4 ring-[#1800FF]/30"
             )}
             aria-label="Rate your experience"
           >
-            <BarChart3 className="h-6 w-6" />
+            <BarChart3 className="h-6 w-6 text-white" />
           </Button>
         </DrawerTrigger>
 
-        <DrawerContent className="max-w-md mx-auto">
+        <DrawerContent className="max-w-md mx-auto bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700">
           <DrawerHeader className="text-center pb-2">
             <div className="flex justify-center mb-4">
-              <div className="p-3 bg-primary/10 rounded-full">
-                <BarChart3 className="h-8 w-8 text-primary" />
+              <div className="p-3 bg-[#1800FF]/10 dark:bg-[#1800FF]/20 rounded-full border border-[#1800FF]/20 dark:border-[#1800FF]/30">
+                <BarChart3 className="h-8 w-8 text-[#1800FF] dark:text-[#3366FF]" />
               </div>
             </div>
-            <DrawerTitle className="text-xl font-semibold">
+            <DrawerTitle className="text-xl font-semibold text-slate-900 dark:text-slate-100">
               How was your experience?
             </DrawerTitle>
-            <DrawerDescription className="text-muted-foreground">
+            <DrawerDescription className="text-slate-600 dark:text-slate-400">
               {hasReachedBottom && shouldAutoTrigger 
                 ? "We noticed you've explored our dashboard. Please share your feedback!"
                 : "Please rate your overall satisfaction"
@@ -182,12 +182,12 @@ export function CSATDrawer() {
             </DrawerDescription>
           </DrawerHeader>
 
-          <div className="px-6 pb-6">
+          <div className="px-6 pb-6 bg-white dark:bg-slate-900">
             {hasSubmitted ? (
               <div className="text-center py-8">
                 <div className="text-4xl mb-4">✅</div>
-                <h3 className="text-lg font-medium mb-2">Thank you for your feedback!</h3>
-                <p className="text-muted-foreground">Your rating helps us improve our service.</p>
+                <h3 className="text-lg font-medium mb-2 text-slate-900 dark:text-slate-100">Thank you for your feedback!</h3>
+                <p className="text-slate-600 dark:text-slate-400">Your rating helps us improve our service.</p>
               </div>
             ) : (
               <div className="space-y-3">
@@ -196,21 +196,21 @@ export function CSATDrawer() {
                     key={option.id}
                     onClick={() => handleRatingSelect(option.id)}
                     className={cn(
-                      "w-full p-4 rounded-lg border-2 transition-all duration-200 text-left",
+                      "w-full p-4 rounded-lg border-2 transition-all duration-200 text-left bg-white dark:bg-slate-800",
                       option.color,
                       selectedRating === option.id
-                        ? "border-primary bg-primary/5 dark:bg-primary/10"
-                        : "border-gray-200 dark:border-gray-700"
+                        ? "border-[#1800FF] bg-[#1800FF]/5 dark:bg-[#1800FF]/10"
+                        : "border-slate-200 dark:border-slate-600"
                     )}
                   >
                     <div className="flex items-center gap-4">
                       <span className="text-3xl">{option.emoji}</span>
                       <div className="flex-1">
-                        <h4 className="font-medium text-foreground">{option.title}</h4>
-                        <p className="text-sm text-muted-foreground">{option.description}</p>
+                        <h4 className="font-medium text-slate-900 dark:text-slate-100">{option.title}</h4>
+                        <p className="text-sm text-slate-600 dark:text-slate-400">{option.description}</p>
                       </div>
                       {selectedRating === option.id && (
-                        <div className="w-5 h-5 rounded-full bg-primary flex items-center justify-center">
+                        <div className="w-5 h-5 rounded-full bg-[#1800FF] flex items-center justify-center">
                           <div className="w-2 h-2 rounded-full bg-white"></div>
                         </div>
                       )}
@@ -222,17 +222,17 @@ export function CSATDrawer() {
           </div>
 
           {!hasSubmitted && (
-            <DrawerFooter className="pt-0">
+            <DrawerFooter className="pt-0 bg-white dark:bg-slate-900 border-t border-slate-200 dark:border-slate-700">
               <div className="flex gap-3">
                 <DrawerClose asChild>
-                  <Button variant="outline" className="flex-1">
+                  <Button variant="outline" className="flex-1 border-slate-300 dark:border-slate-600 text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800">
                     {hasReachedBottom && shouldAutoTrigger ? "Maybe Later" : "Cancel"}
                   </Button>
                 </DrawerClose>
                 <Button 
                   onClick={handleSubmit}
                   disabled={!selectedRating}
-                  className="flex-1"
+                  className="flex-1 bg-[#1800FF] hover:bg-[#1500CC] text-white disabled:bg-slate-300 dark:disabled:bg-slate-600 disabled:text-slate-500"
                 >
                   Submit Rating
                 </Button>

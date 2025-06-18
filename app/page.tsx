@@ -1,4 +1,5 @@
 "use client"
+import React from "react"
 
 import { OverviewKpiCards } from "@/components/navigator/overview-kpi-cards"
 import { RateTrendsChart } from "@/components/navigator/rate-trends-chart"

@@ -1,4 +1,5 @@
 "use client"
+import React from "react"
 import { CardDescription } from "@/components/ui/card"
 import { DemandCalendar } from "@/components/navigator/demand-calendar"
 import { DemandForecastChart } from "@/components/navigator/demand-forecast-chart"

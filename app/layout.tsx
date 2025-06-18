@@ -332,6 +332,10 @@ export default function RootLayout({
           </div>
         </ThemeProvider>
 
+        {/* Enhanced User Experience Features */}
+        <GuidedTourAutoStart />
+        <CSATDrawer />
+
         {/* Performance Monitoring Script (if needed) */}
         {process.env.NODE_ENV === 'production' && (
           <script
